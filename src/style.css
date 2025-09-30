@@ -1,0 +1,86 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+body{
+  background-color: #ebebf3 ;
+}
+
+.sideBar{
+    height: 10%;
+    width: 20%; 
+    position:fixed!important;
+    bottom: 0
+}
+
+.logout{
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
+
+.modal{
+    position: fixed!important;
+    top: 50%;
+    left: 50%;
+    /* width: 300px; */
+    transform: translate(-50%,-50%) scale(0)  ;
+    transition: 150ms ease-in-out;
+    padding: 20px;
+    z-index: 999;
+    border-radius: 20px;
+  }
+  .genModal{
+    position: fixed!important;
+    left: 50%;  
+    top: 50%;
+    height: 100%;
+    transform: translate(-50%,-50%) scale(0)  ;
+    transition: 30ms ease-in-out;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 10px 5px 40px 14px rgba(38.81, 136.75, 227.16, 0.13);
+    z-index: 999;
+  
+  }
+
+  .modal-show {
+    transform: translate(-50%, -50%) scale(1);
+
+  }
+  .overlay {
+    display: block;
+    position: fixed!important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    /* backdrop-filter: blur(2px); */
+    /* transition: transform 0.3s ease, opacity 0.3s ease; */
+  }
+  .skeleton-loader {
+    background-color:rgba(240, 238, 238, 0.9); 
+    border-radius: 10px; 
+    overflow: hidden; 
+  }
+  
+  .skeleton-line {
+  
+    margin: 8px 0; 
+    background: linear-gradient(90deg, #80808025, rgba(207, 241, 14, 0.1) 50%, rgba(152, 240, 213, 0.1) 75%); 
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite; 
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
