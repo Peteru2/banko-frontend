@@ -2,8 +2,9 @@ import React from 'react'
 
 const Cards = () => {
   return (
-    <div>
-        <div className="justify-center w-max-[560px] w-full mb-[35px] mt-[25px]  ">
+    <div className=" w-full justify-center  flex items-center font-roboto ">
+      <div className=" w-full max-w-[560px]  rounded-md rounded-b-[0px] mb-[35px] mt-[25px]  mx-[20px] items-center">
+       
             <h2 className='text-[12px]'>Cards</h2>
             <div className='flex justify-between w-full bg-white mb-[10px] rounded-[10px] p-[12px] w-full items-center'>
                 <div className='flex '>

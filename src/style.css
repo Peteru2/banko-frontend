@@ -59,8 +59,8 @@ body{
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
-    /* backdrop-filter: blur(2px); */
-    /* transition: transform 0.3s ease, opacity 0.3s ease; */
+    backdrop-filter: blur(2px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
   .skeleton-loader {
     background-color:rgba(240, 238, 238, 0.9); 
@@ -69,7 +69,6 @@ body{
   }
   
   .skeleton-line {
-  
     margin: 8px 0; 
     background: linear-gradient(90deg, #80808025, rgba(207, 241, 14, 0.1) 50%, rgba(152, 240, 213, 0.1) 75%); 
     background-size: 200% 100%;

@@ -8,6 +8,7 @@ export const TransComp = ({trans, transHis, userData, option}) => {
           <div>
         
           {transHis && transHis.length === 0 ? (
+            
             <div className="bg-white  py-4 rounded-[10px] ">
               <h2 className="font-bold text-sm text-center ">
                 No transaction history found

@@ -28,7 +28,7 @@ const Navbar = ({ userData }) => {
       <nav className=" w-full h-12 justify-center  flex items-center font-roboto ">
         <div className=" flex w-full max-w-[600px] bg-bg mb-[100px]  fixed top-0 h-[48px] rounded-md rounded-b-[0px] border-b-[1px] border-gray items-center">
           <div className="w-full flex items-center justify-between">
-          <div className="pl-[20px]">
+          <div className="ml-[20px]">
             <img
               src={ProImg}
               alt="profileImage"
@@ -38,7 +38,7 @@ const Navbar = ({ userData }) => {
           <div>
             <p className="text-black text-[16px] text-opacity-70"> ₦{acctBalance && acctBalance.toLocaleString()}</p>
           </div>
-          <div className=" relative cursor-pointer w-[22px] pr-[20px]" onClick={handleNotice}>
+          <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
             <i className="fa fa-bell  text-black"></i>
             <span className="absolute left-[10px] top-[2px] bg-red w-1 h-1 rounded-full"></span>
           </div>

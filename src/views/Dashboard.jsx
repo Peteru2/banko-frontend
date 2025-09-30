@@ -11,7 +11,7 @@ const Dashboard = () => {
     return ( 
         <>
           {userData &&(
-            <div className='flex justify-center'>
+            <div className=''>
              
               <div>
                 <Navbar userData={userData} />
@@ -22,7 +22,9 @@ const Dashboard = () => {
                 <AccDetails userData={userData} logout={logout}  />
                 </div>
                 ):(
+                  <div className="flex justify-center">
                   <Loader />
+                  </div>
                 )}
                 
 

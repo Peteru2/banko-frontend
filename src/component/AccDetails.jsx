@@ -61,14 +61,14 @@ const AccDetails = ({ userData, setUserData }) => {
 
   const handleSubmitPin = async (pin) => {
     try {
-      const response = await api.put("/updateTransactionPin", { pin });  
+      const response = await api.put("/updateTransactionPin", { pin });
       setShowPinInput(false);
       toast.success("Transaction Pin updated", {
         position: "top-right",
       });
       setTimeout(() => {
-            window.location.href = "/";
-          } , 100); 
+        window.location.href = "/";
+      }, 100);
       console.log(response.data);
     } catch (error) {
       console.error("Failed to update transaction pin:", error);
@@ -80,23 +80,23 @@ const AccDetails = ({ userData, setUserData }) => {
   const trans = transHis && transHis.slice().reverse();
 
   return (
-    <>
-      { acctBalance ? (
-        <div className="font-roboto">
-          <form
-            onSubmit={handleSubmitPin}
-            className={`modal w-[300px]  font-roboto ${showPinInput ? "modal-show" : ""}`}
-          >
-            <div className="bg-white p-4 rounded-[6px] ">
-              <h2 className="text-19px text-center">
-                Set Your Transaction Pin
-              </h2>
-              <TransPinForm onSubmit={handleSubmitPin} />
-            </div>
-          </form>
-        
-        
-          {/* <div className="flex items-center ">
+    <div className=" w-full justify-center  flex  font-roboto ">
+      <div className="w-full max-w-[560px]  mx-[20px]  ">
+        {acctBalance ? (
+          <div className="font-roboto">
+            <form
+              onSubmit={handleSubmitPin}
+              className={`modal w-[300px]  font-roboto ${showPinInput ? "modal-show" : ""}`}
+            >
+              <div className="bg-white p-4 rounded-[6px] ">
+                <h2 className="text-19px text-center">
+                  Set Your Transaction Pin
+                </h2>
+                <TransPinForm onSubmit={handleSubmitPin} />
+              </div>
+            </form>
+
+            {/* <div className="flex items-center ">
             <h4 className="bg-private text-[20px] mr-4 px-3 rounded-[2px]">
               ₦
             </h4>
@@ -135,28 +135,32 @@ const AccDetails = ({ userData, setUserData }) => {
             <UpdateKyc onClose={() => setBvn(false)} />
           </div> */}
 
-          <div className={`${showPinInput || bvn ? "overlay" : ""} `}></div>
+            <div className={`${showPinInput || bvn ? "overlay" : ""} `}></div>
 
-          <div className="w-full max-w-[560px]  ">
-            <div className="flex justify-between w-full">
-              <p className="text-[20px] text-black text-opacity-70 ">Latest transactions</p>
-               <Link to="/History"><p className="text-private">View all</p></Link>
+            <div className="flex justify-between ">
+              <p className="md:text-[18px] text-black text-opacity-70">
+                Latest transactions
+              </p>
+              <Link to="/History">
+                <p className="text-private">View all</p>
+              </Link>
             </div>
+
             <TransComp
               transHis={transHis}
-              trans={trans.slice(0,3)}
+              trans={trans.slice(0, 3)}
               userData={userData}
               option={option}
             />
           </div>
-          <ToastContainer />
-        </div>
-      ) : (
-        <>
-          <Loader />
-        </>
-      )}
-    </>
+        ) : (
+          <div className="w-full flex justify-center">
+            <Loader />
+          </div>
+        )}
+      </div>
+      <ToastContainer />
+    </div>
   );
 };
 
