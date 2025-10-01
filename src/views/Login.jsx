@@ -89,8 +89,10 @@ const Login = () => {
               setIcon(false);
             }
           } else if (error.request) {
-            // The request was made but no response was received
-            console.log("No response received from server");
+            // console.log("No response received from server");
+            toast.error("No response received from server", {
+                position: "top-right",
+              });
             setIcon(false);
           } else {
             console.log("Error:", error.message);
