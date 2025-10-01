@@ -143,7 +143,8 @@ const SignUp = () => {
   return (
     <>
       <div className="flex">
-        <section className="mx-10 h-screen  flex  items-center ">
+             <section className="md:mx-10 mx-4 h-screen   flex  items-center ">
+
           <div>
             <div>
               <h2 className="text-[26px] text-private font-bold  flex  font-playfair">
@@ -180,7 +181,7 @@ const SignUp = () => {
                     {errors.firstname}
                   </span>
                 </label>
-                <div className="flex items-center bg-white rounded-[5px] mt-1 px-3  py-2">
+                 <div className="flex items-center w-90 bg-white border-gray rounded-[5px] px-3 mt-1  py-[8px]">
                   <input
                     type="text"
                     className="w-full outline-none text-black"
@@ -205,7 +206,7 @@ const SignUp = () => {
                   </span>
                 </label>
 
-                <div className="flex items-center bg-white rounded-[5px] mt-1 px-3  py-2">
+                 <div className="flex items-center w-90 bg-white border-gray rounded-[5px] px-3 mt-1  py-[8px]">
                   <input
                     type="text"
                     className="w-full outline-none text-black"
@@ -227,7 +228,7 @@ const SignUp = () => {
                     {errors.email}
                   </span>
                 </label>
-                <div className="flex items-center bg-white rounded-[5px] px-3  mt-1 py-2">
+                 <div className="flex items-center w-90 bg-white border-gray rounded-[5px] px-3 mt-1  py-[8px]">
                   <input
                     type="Email"
                     name="email"
@@ -251,7 +252,7 @@ const SignUp = () => {
                     {errors.phoneNumber}
                   </span>
                 </label>
-                <div className="flex items-center bg-white rounded-[5px] px-3 mt-1  py-2">
+                 <div className="flex items-center w-90 bg-white border-gray rounded-[5px] px-3 mt-1  py-[8px]">
                   <input
                     type="text"
                     name="phoneNumber"
@@ -275,7 +276,7 @@ const SignUp = () => {
                     {errors.password}
                   </span>
                 </label>
-                <div className="flex items-center bg-white rounded-[5px] px-3 mt-1  py-2">
+                <div className="flex items-center w-90 bg-white border-gray rounded-[5px] px-3 mt-1  py-[8px]">
                   <input
                     type="password"
                     name="password"
@@ -362,7 +363,10 @@ const SignUp = () => {
             )}
           </div>
         </section>
+        <div className="md:flex hidden">
+
         <SideView />
+        </div>
       </div>
       <ToastContainer />
     </>

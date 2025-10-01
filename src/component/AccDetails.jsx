@@ -37,7 +37,7 @@ const AccDetails = ({ userData, setUserData }) => {
     const fetchData = async () => {
       try {
         const response = await api.get("/balance");
-        const userResponse = await api.get("/");
+        const userResponse = await api.get("/user");
         const response1 = await api.get("/trans-history");
         setTransHis(response1.data.transferHistory || []);
         setUseData(userResponse.data.user);

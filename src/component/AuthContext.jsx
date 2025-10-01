@@ -5,14 +5,16 @@ import api from "../services/api";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [userData, setUserData] = useState("");
+    const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
 
     const fetchData = async () => {
       try {
-        const response = await api.get("/");
+        const response = await api.get("/user", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
         if (response.data.user) {
           setUserData(response.data.user);
         } else {

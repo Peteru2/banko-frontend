@@ -22,7 +22,7 @@ const TransHistory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userResponse = await api.get("/");
+        const userResponse = await api.get("/user");
         const response = await api.get("/trans-history");
         setTransHis(response.data.transferHistory || []);
         setUserData(userResponse.data.user);
