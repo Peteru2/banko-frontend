@@ -201,7 +201,7 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="bg-public shadow-md  mt-4 text-[14px] bg-opacity-60 hover:bg-opacity-90  text-black  md:py-1 md:px-3 px-6 rounded-md "
+                className="bg-public shadow-md  mt-4 text-[14px] bg-opacity-60 hover:bg-opacity-90  text-black  py-2 md:px-3 px-6 rounded-md "
               >
                 {icon ? (
                   <span className="text-white">
