@@ -293,7 +293,7 @@ const SignUp = () => {
                 className="bg-public  mt-4  bg-opacity-60 hover:bg-opacity-90  text-white  py-1 px-3 rounded-md "
               >
                 {icon ? (
-                  <span>
+                  <span className="text-white">
                     Submitting <i className="fas fa-spinner fa-spin"></i>
                   </span>
                 ) : (

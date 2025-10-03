@@ -201,11 +201,11 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="bg-public shadow-md  mt-4  bg-opacity-60 hover:bg-opacity-90  text-black  py-1 px-3 rounded-md "
+                className="bg-public shadow-md  mt-4 text-[14px] bg-opacity-60 hover:bg-opacity-90  text-black  md:py-1 md:px-3 px-6 rounded-md "
               >
                 {icon ? (
-                  <span>
-                    Submitting <i className="fas fa-spinner fa-spin"></i>
+                  <span className="text-white">
+                  Submitting <i className="fas fa-spinner  fa-spin"></i>
                   </span>
                 ) : (
                   <span className="text-white">Login</span>
