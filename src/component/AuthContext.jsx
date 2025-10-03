@@ -18,18 +18,18 @@ export const AuthContextProvider = ({ children }) => {
     if (response.data.user) {
       setUserData(response.data.user);
     } else {
-      navigate("/Login");
+      navigate("/login");
     }
   } catch (error) {
     console.error("Fetch user failed:", error);
 
     if (error?.response?.status === 401) {
      
-      navigate("/Login");
+      navigate("/login");
     } else {
       
       setUserData(null);
-      navigate("/Login");
+      navigate("/login");
     }
   }
 };

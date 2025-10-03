@@ -52,7 +52,7 @@ const Login = () => {
     } else {
       setIcon(true);
       axios
-        .post(`${import.meta.env.VITE_BASE_URL}/Login`, formData)
+        .post(`${import.meta.env.VITE_BASE_URL}/login`, formData)
         .then((response) => {
           const { token } = response.data;
           localStorage.setItem("token", token);
@@ -118,7 +118,7 @@ const Login = () => {
       toast.success(response.data.message, {
         position: "top-right",
       });
-      navigate("/Login");
+      navigate("/login");
     } catch (error) {
       toast.error(error.response?.data?.error, {
         position: "top-right",

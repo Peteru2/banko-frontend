@@ -78,7 +78,7 @@ const SignUp = () => {
       console.log(formData);
       setIcon(true);
       axios
-        .post(`${import.meta.env.VITE_BASE_URL}/SignUp`, formData)
+        .post(`${import.meta.env.VITE_BASE_URL}/signUp`, formData)
         .then((response) => {
           setFormData({
             firstname: "",
@@ -130,7 +130,7 @@ const SignUp = () => {
         position: "top-right",
       });
       setTimeout(() => {
-        navigate("/Login");
+        navigate("/login");
       }, 1100);
     } catch (error) {
       toast.error(error.response?.data?.error || "Something went wrong", {
@@ -164,7 +164,7 @@ const SignUp = () => {
                   <h2 className="my- text-black font-roboto font-bold  text-public text-opacity-80 text-[16px]">
                     Have an account?{" "}
                     <span className="text-blue">
-                      <Link to={"/Login"}>Login in now</Link>
+                      <Link to={"/login"}>Login in now</Link>
                     </span>
                   </h2>
                 </div>
