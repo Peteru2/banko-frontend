@@ -255,7 +255,7 @@ const Login = () => {
           </div>
         </section>
 
-        <div className="md:flex hidden">
+        <div className="md:flex hidden w-full">
         <SideView />
         </div>
       </div>

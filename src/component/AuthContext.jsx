@@ -5,12 +5,11 @@ import api from "../services/api";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-    const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
-
-    const fetchData = async () => {
+  
+  const fetchData = async () => {
   try {
     const response = await api.get("/user", {
       headers: { Authorization: `Bearer ${token}` }
@@ -19,18 +18,18 @@ export const AuthContextProvider = ({ children }) => {
     if (response.data.user) {
       setUserData(response.data.user);
     } else {
-      navigate("/login");
+      navigate("/Login");
     }
   } catch (error) {
     console.error("Fetch user failed:", error);
 
     if (error?.response?.status === 401) {
      
-      navigate("/login");
+      navigate("/Login");
     } else {
       
       setUserData(null);
-      navigate("/login");
+      navigate("/Login");
     }
   }
 };
