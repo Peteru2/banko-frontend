@@ -65,7 +65,9 @@ const SignUp = () => {
             phoneNumber: "",
             password: "",
           });
-          setUserId(response.data.user._id);
+          // setUserId(response.data.user._id);
+          toast.success("User acccount created", { position: "top-right" });
+      setTimeout(() => navigate("/login"), 1100);
           setIcon(false);
         })
         .catch((error) => {
@@ -124,8 +126,6 @@ const SignUp = () => {
                   Login now
                 </Link>
               </p>
-
-              {/* Input fields */}
     
 
 {["firstname", "lastname", "email", "phoneNumber", "password"].map((field, idx) => (
