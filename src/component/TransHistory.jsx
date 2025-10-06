@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { TransComp } from "./TransComp";
 import Loader from "./Loader";
+import Header from "./Header";
 
 const TransHistory = () => {
   const [transHis, setTransHis] = useState(null);
@@ -54,14 +55,7 @@ const TransHistory = () => {
     <>
       <div className="flex justify-center font-roboto">
         <div className="justify-center  w-full max-w-[560px] ">
-          <div className=" flex text my-2 text-black text-opacity-60  items-center h-[48px] text-[18px]">
-            <h2 className="cursor-pointer md:px-[10px] pl-[20px] pr-[0px]" onClick={() => navigate(-1)}>
-              <i className="fa fa-arrow-left"> </i>
-            </h2>
-            <h2 className="  w-full text-center text-black text-opacity-70">
-              Transaction history
-            </h2>
-          </div>
+          <Header header={"Transaction history"}/>
           {transHis ? (
             <>
             {transHis.length === 0? (<>

@@ -3,6 +3,7 @@ import ProImg from "../../assets/image/ProImg.svg";
 import { useState, useEffect } from "react";
 import Notification from "../Notification";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 
 
 const Navbar = ({ userData }) => {
@@ -28,6 +29,7 @@ const Navbar = ({ userData }) => {
       <nav className=" w-full h-12 justify-center  flex items-center font-roboto ">
         <div className=" flex w-full max-w-[600px] bg-bg mb-[100px]  fixed top-0 h-[48px] rounded-md rounded-b-[0px] border-b-[1px] border-gray items-center">
           <div className="w-full flex items-center justify-between">
+            <Link to='/profile'>
           <div className="ml-[20px]">
             <img
               src={ProImg}
@@ -35,6 +37,7 @@ const Navbar = ({ userData }) => {
               className=" text-black  w-[22px] h-[22px]  rounded-full"
             />
           </div>
+          </Link>
           <div>
             <p className="text-black text-[16px] text-opacity-70"> ₦{acctBalance && acctBalance.toLocaleString()}</p>
           </div>

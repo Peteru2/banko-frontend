@@ -147,7 +147,7 @@ const Login = () => {
                 </label>
                 <div className="border relative flex border-gray rounded-md px-3 py-2 mt-1 text-black">
                 <input
-                  type="password"
+                  type={showPassword?"text":"password"}
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}

@@ -6,7 +6,8 @@ import "./style.css"
 import AuthContextProvider from "./component/AuthContext"
 import Deposits from './component/footer/Deposits';
 import History from './component/footer/History';
-import SentimentApp from './views/SentimentApp';
+import Profile from './views/Profile';
+
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/deposits" element={<Deposits />} />
               <Route path="/history" element={<History />} />
-              <Route path="/sentiment" element={<SentimentApp />} />
+              <Route path="/profile" element={<Profile />} />
+
 
 
 
