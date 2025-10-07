@@ -16,7 +16,7 @@ const Profile = () => {
         onClick={logout}
         className='w-full bg-white text-left outline-none shadow rounded-[5px] py-[15px] text-red px-[15px]'
         >
-        Logout
+       <i className='fa fa-sign-out'></i> Logout    
 
         </button>
    
