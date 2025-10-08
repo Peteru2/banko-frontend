@@ -7,6 +7,7 @@ import Logo from "../assets/image/Logo.png";
 import SideView from "../component/sideView";
 import api from "../services/api";
 import { useAuth } from "../component/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -53,7 +54,12 @@ const Login = () => {
         .then((response) => {
           const { token } = response.data;
           localStorage.setItem("token", token);
-          toast.success(response.data.message, { position: "top-right" });
+          Swal.fire({
+    icon: "success",
+    title: "Success!",
+    text: response.data.message,
+  });
+         
           navigate("/");
           setUserData(response.data.user);
 
@@ -63,15 +69,32 @@ const Login = () => {
         .catch((error) => {
           if (error.response) {
             if (error.response.status === 404) {
-              toast.error(error.response?.data?.error, { position: "top-right" });
+              Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   error.response?.data?.error,
+  });
+             
             } else if (error.response.status === 401) {
-              toast.error(error.response?.data?.error, { position: "top-right" });
+              Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   error.response?.data?.error,
+  });
               setUserId(error.response.data.user);
             } else {
-              toast.error(error.response?.data?.message, { position: "top-right" });
+             Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   error.response?.data?.message,
+  });
             }
           } else if (error.request) {
-            toast.error("No response received from server", { position: "top-right" });
+            Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   "No response from the server",
+  });
           } else {
             console.log("Error:", error.message);
           }
@@ -91,10 +114,19 @@ const Login = () => {
       const response = await api.post("/verifyEmail", { userId, emailVerificationCode });
       setUserId("");
       setEmailVerificationCode("");
-      toast.success(response.data.message, { position: "top-right" });
+      Swal.fire({
+    icon: "success",
+    title: "Success!",
+    text: response.data.message,
+  });
+    
       navigate("/login");
     } catch (error) {
-      toast.error(error.response?.data?.error, { position: "top-right" });
+      Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   error.response?.data?.error,
+  });
       setLoading(false);
     }
   };
@@ -113,7 +145,7 @@ const Login = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="font-roboto w-full text-black">
-              <h2 className="my-2 text-black text-[24px] font-semibold">
+              <h2 className="my-2 text-opacity-70 text-black text-[24px] font-semibold">  
                 Log in to your account
               </h2>
               <p className="text-[14px] text-gray-600 mb-6">
@@ -125,7 +157,7 @@ const Login = () => {
 
               {/* Email */}
               <div className="mb-4">
-                <label className="text-[14px] font-bold flex justify-between">
+                <label className="text-[14px] text-opacity-70 text-black font-bold flex justify-between">
                   <span>Email</span>
                   <span className="text-red">{errors.email}</span>
                 </label>
@@ -141,7 +173,7 @@ const Login = () => {
 
               {/* Password */}
               <div className="mb-6">
-                <label className="text-[14px] font-bold flex justify-between">
+                <label className="text-[14px] text-opacity-70 text-black font-bold flex justify-between">
                   <span>Password</span>
                   <span className="text-red">{errors.password}</span>
                 </label>
@@ -157,7 +189,7 @@ const Login = () => {
                  <button
         type="button"
         onClick={() => setShowPassword((prev) => !prev)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-opacity-70 text-black hover:text-black"
       >
         <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
       </button>

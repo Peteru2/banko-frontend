@@ -6,6 +6,8 @@ import Loader from '../component/Loader';
 import AccDetails from '../component/AccDetails';
 import { useAuth } from '../component/AuthContext';
 import Cards from '../component/Cards';
+import { ToastContainer } from "react-toastify";
+
 const Dashboard = () => {
  const {userData, logout, setUserData} = useAuth()
     return ( 
@@ -30,9 +32,12 @@ const Dashboard = () => {
 
                 <Footer  userData={userData} />
                 </div>
+                
             </div>
 
              )}
+                      <ToastContainer />
+
         </>
      );
 }

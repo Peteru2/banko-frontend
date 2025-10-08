@@ -6,10 +6,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const [icon, setIcon] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
   const [userId, setUserId] = useState("");
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
   const [loading, setLoading] = useState(false);
@@ -67,13 +67,20 @@ const SignUp = () => {
           });
           // setUserId(response.data.user._id);
           toast.success("User acccount created", { position: "top-right" });
+          Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "User account created",
+            });
       setTimeout(() => navigate("/login"), 1100);
           setIcon(false);
         })
         .catch((error) => {
-          toast.error(error.response?.data?.error || "Something went wrong", {
-            position: "top-right",
-          });
+          Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: error.response?.data?.error ,
+  });
           setIcon(false);
         });
     }
@@ -90,12 +97,18 @@ const SignUp = () => {
       });
       setUserId("");
       setEmailVerificationCode("");
-      toast.success(response.data.message, { position: "top-right" });
+    Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: response.data.message,
+      });
       setTimeout(() => navigate("/login"), 1100);
     } catch (error) {
-      toast.error(error.response?.data?.error || "Something went wrong", {
-        position: "top-right",
-      });
+     Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: error.response?.data?.error ,
+  });
       setLoading(false);
     }
   };
@@ -103,20 +116,20 @@ const SignUp = () => {
   return (
     <>
       <div className="min-h-screen flex flex-col md:flex-row">
-        {/* Left form section */}
+       
         <section className="flex flex-1 justify-center items-center p-6">
           <div className="w-full max-w-md">
-            {/* Logo */}
-            <div className="flex items-center justify-center mb-6">
-              <img src={Logo} className="w-10 mr-2" alt="banko Logo" />
-              <h2 className="text-2xl font-bold font-playfair text-private">Banko.</h2>
-            </div>
+           
+            
 
-            {/* Form */}
             <form
               onSubmit={handleSubmit}
               className="bg-white shadow-md rounded-lg p-6 md:p-8 font-roboto"
             >
+              <div className="flex items-center mb-4">
+              <img src={Logo} className="w-8 mr-2" alt="banko Logo" />
+              <h2 className="text-2xl font-bold font-playfair text-private">Banko.</h2>
+            </div>
               <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-private">
                 Create your account
               </h2>
@@ -133,7 +146,7 @@ const SignUp = () => {
     <input
       type={field === "password" && showPassword ? "text" : field === "password" ? "password" : "text"}
       name={field}
-      value={formData[field]}
+      value={formData[field]} 
       onChange={handleInputChange}
       placeholder={
         field === "firstname"
@@ -148,13 +161,11 @@ const SignUp = () => {
       }
       className="w-full border border-gray rounded-md px-4 py-2 text-black outline-none focus:ring-2 focus:ring-blue-500"
     />
-
-    {/* Only show toggle for password field */}
     {field === "password" && (
       <button
         type="button"
         onClick={() => setShowPassword((prev) => !prev)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-opacity-70 text-black hover:text-black"
       >
         <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
       </button>

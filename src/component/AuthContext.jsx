@@ -28,25 +28,18 @@
 
       if (response.data.user) {
         setUserData(response.data.user);
-      } else {
-        navigate("/login");
-      }
+      } 
     } catch (error) {
       console.error("Fetch user failed:", error);
-
       if (error?.response?.status === 401) {
-        
+      
         navigate("/login");
       } else {
-        
         setUserData(null);
         navigate("/login");
       }
     }
   };
-
-    
-
 
     const logout = () => {
       localStorage.removeItem("token");

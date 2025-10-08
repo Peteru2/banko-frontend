@@ -10,6 +10,7 @@ import Profile from './views/Profile';
 
 
 
+
 function App() {
 
   return (
@@ -31,6 +32,8 @@ function App() {
 
 
             </Routes>
+         
+
         </AuthContextProvider>
 
         </Router>

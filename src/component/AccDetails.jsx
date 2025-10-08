@@ -12,17 +12,17 @@ import { TransComp } from "./TransComp.jsx";
 import { useAuth } from "./AuthContext.jsx";
 import { Link } from "react-router-dom";
 import Cards from "./Cards.jsx";
+import Swal from "sweetalert2";
 
 // const socket = io.connect('http://localhost:8000');
 
-const AccDetails = ({ userData, setUserData }) => {
+const AccDetails = () => {
+  const {userData, setUserData} = useAuth()
   const [bvn, setBvn] = useState(false);
   const [showPinInput, setShowPinInput] = useState(false);
-  const [acctBalance, setAcctBalance] = useState(null);
   const [acctNum, setAcctNum] = useState(null);
   const [transHis, setTransHis] = useState(null);
-  const [useData, setUseData] = useState("");
-  const navigate = useNavigate();
+
   const option = {
     year: "numeric",
     month: "short",
@@ -37,40 +37,49 @@ const AccDetails = ({ userData, setUserData }) => {
     const fetchData = async () => {
       try {
         const response = await api.get("/balance");
-        const userResponse = await api.get("/user");
-        const response1 = await api.get("/trans-history");
-        setTransHis(response1.data.transferHistory || []);
-        setUseData(userResponse.data.user);
+        const transactionResponse = await api.get("/trans-history");
+        setTransHis(transactionResponse.data.transferHistory || []);
         setAcctBalance(response.data.balance);
         setAcctNum(response.data.accountNum);
 
-        if (userData.transactionPin == "0") {
+        if (userData.transactionPin === "0") {
           setShowPinInput(true);
         }
+        console.log(userData)
       } catch (error) {
-        // console.error("Failed to fetch user data:");
-        if (error.response.data.error == "No history found") {
+        if (error.response?.data?.error == "No history found") {
           setTransHis([]);
-          console.log(transHis);
+
         }
       }
-      console.log(userData);
     };
     fetchData();
-  }, []);
+  }, [userData]);
 
-  const handleSubmitPin = async (pin) => {
+  const handleSubmitTransactionPin = async (pin) => {
     try {
       const response = await api.put("/updateTransactionPin", { pin });
-      setShowPinInput(false);
-      toast.success("Transaction Pin updated", {
-        position: "top-right",
+      if(response.data){
+        Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Transaction Pin updated successfully.",
       });
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 100);
-      console.log(response.data);
+        
+        setShowPinInput(false);
+        setUserData(response?.data)
+      }
+      console.log(userData?.transactionPin)
+      // setTimeout(() => {
+      //   window.location.href = "/";
+      // }, 100);
+   
     } catch (error) {
+      Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   "Invalid BVN Pin",
+  });
       console.error("Failed to update transaction pin:", error);
     }
   };
@@ -81,34 +90,20 @@ const AccDetails = ({ userData, setUserData }) => {
 
   return (
     <div className=" w-full justify-center  flex  font-roboto ">
-      <div className="w-full max-w-[560px]  mx-[20px]  ">
-        {acctBalance ? (
-          <div className="font-roboto">
-            <form
-              onSubmit={handleSubmitPin}
-              className={`modal w-[300px]  font-roboto ${showPinInput ? "modal-show" : ""}`}
-            >
-              <div className="bg-white p-4 rounded-[6px] ">
-                <h2 className="text-19px text-center">
-                  Set Your Transaction Pin
-                </h2>
-                <TransPinForm onSubmit={handleSubmitPin} />
-              </div>
-            </form>
-
-            {/* <div className="flex items-center ">
-            <h4 className="bg-private text-[20px] mr-4 px-3 rounded-[2px]">
+      <div className="w-full max-w-[560px]  mx-[20px]  ">        
+            <div className="flex items-center ">
+            {/* <h4 className="bg-private text-[20px] mr-4 px-3 rounded-[2px]">
               ₦
-            </h4>
-            <div>
+            </h4> */}
+            {/* <div>
               {userData && (
                 <div>
                   <p className="font-bold">
                     {" "}
-                    {userData.firstname + " " + userData.lastname}
+                    {userData?.firstname + " " + userData?.lastname}
                   </p>
                   <p className="text-gray text-xs">
-                    KYC LEVEL {userData.kycLevel}{" "}
+                    KYC LEVEL {userData?.kycLevel}{" "}
                   </p>
                 </div>
               )}
@@ -128,12 +123,26 @@ const AccDetails = ({ userData, setUserData }) => {
                   <i className="fa fa-sort-up rotate-90"></i>
                 </span>
               </div>
-            )}
+            )} */}
           </div>
+        {userData ? (
+          <div className="font-roboto">
+            <form
+              onSubmit={handleSubmitTransactionPin}
+              className={`modal w-[300px]  font-roboto ${showPinInput ? "modal-show" : ""}`}
+            >
+              <div className="bg-white p-4 rounded-[6px] ">
+                <h2 className="text-19px text-center">
+                  Set Your Transaction Pin
+                </h2>
+                <TransPinForm onSubmit={handleSubmitTransactionPin} />
+              </div>
+            </form>
+
            
           <div className={`modal font-roboto ${bvn ? "modal-show" : ""}`}>
             <UpdateKyc onClose={() => setBvn(false)} />
-          </div> */}
+          </div>
 
             <div className={`${showPinInput || bvn ? "overlay" : ""} `}></div>
 
@@ -148,7 +157,7 @@ const AccDetails = ({ userData, setUserData }) => {
 
             <TransComp
               transHis={transHis}
-              trans={trans.slice(0, 3)}
+              trans={trans?.slice(0, 3)}
               userData={userData}
               option={option}
             />
@@ -159,7 +168,7 @@ const AccDetails = ({ userData, setUserData }) => {
           </div>
         )}
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 };

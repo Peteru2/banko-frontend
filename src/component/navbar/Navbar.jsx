@@ -8,15 +8,23 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({ userData }) => {
   const [notice, setNotice] = useState(false);
-  const [acctBalance, setAcctBalance] = useState(null);
+  const [acctBalance, setAcctBalance] = useState(null); 
+  const [notificationAlert, setNotificationAlert] = useState(true); 
+
   const handleNotice = () => {
     setNotice((notice) => !notice);
   };
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const transactionResponse = await api.get("/trans-history");
         const response = await api.get("/balance");
         setAcctBalance(response.data.balance);
+        if(transactionResponse.data.transferHistory =  []){
+          console.log("No history found")
+          setNotificationAlert(false)
+        }
+        
       } catch (error) {
         console.error("Failed to fetch user data:");
       }
@@ -39,11 +47,11 @@ const Navbar = ({ userData }) => {
           </div>
           </Link>
           <div>
-            <p className="text-black text-[16px] text-opacity-70"> ₦{acctBalance && acctBalance.toLocaleString()}</p>
+            <p className="text-black text-[16px] font-bold   text-opacity-70"> ₦{acctBalance && acctBalance.toLocaleString()}</p>
           </div>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
             <i className="fa fa-bell  text-black"></i>
-            <span className="absolute left-[10px] top-[2px] bg-red w-1 h-1 rounded-full"></span>
+            <span className={`${notificationAlert?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>
           </div>
         </div>

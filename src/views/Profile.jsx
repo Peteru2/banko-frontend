@@ -20,6 +20,9 @@ const Profile = () => {
 
         </button>
    
+   {/* <form className="">
+        <input type="file" />
+   </form> */}
   </div>
     </div>
     </div>

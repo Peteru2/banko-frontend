@@ -3,6 +3,7 @@ import api from "../services/api.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./AuthContext.jsx";
+import Swal from "sweetalert2";
 
 const UpdateKyc = ({ onClose }) => {
   const { fetchData, setUserData } = useAuth();
@@ -12,18 +13,30 @@ const UpdateKyc = ({ onClose }) => {
     e.preventDefault();
     const numericRegex = /^\d+$/;
     if (bvn.length < 10 || bvn.length > 10) {
-      toast.error("Invalid BVN Pin", {
-        position: "top-right",
-      });
+       Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   "Invalid BVN Pin",
+  });
+      
     } else if (!numericRegex.test(bvn)) {
-      toast.error("Invalid BVN Pin", {
-        position: "top-right",
-      });
+    wal.fire({
+    icon: "error",
+    title: "Oops...",
+    text:   "Invalid BVN Pin",
+  });
     } else {
       try {
         const response = await api.put("/updatekyc", { bvn });
         if (response.data.user) {
           setUserData(response.data.user);
+          console.log(response.data.user)
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "KYC level upgraded to level 2.",
+          });
+        
         } else {
           await fetchData();
         }
@@ -31,14 +44,20 @@ const UpdateKyc = ({ onClose }) => {
         console.log("KYC Level Upgraded");
         setBVN("");
       } catch (error) {
-        if (error.response.status === 401) {
-          toast.error(error.response.data.error, {
-            position: "top-right",
+        if (error.response?.status   === 401) {
+           Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.response?.data?.error,
           });
+          
         } else {
-          toast.error(error.response.data.error, {
-            position: "top-right",
-          });
+           Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: error.response?.data?.error ,
+  });
+          
           onClose();
           setBVN("");
         }

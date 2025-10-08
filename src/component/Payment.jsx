@@ -52,7 +52,7 @@ const Payment = () => {
         {paymentList.map((item, index) => {
           return (
             <>
-            <div className=" max-w-[600px]">
+            <div key={index} className=" max-w-[600px]">
               <div
                 className={`${item.func===""?"":"cursor-pointer"} "flex   justify-center"`}
                 onClick={item.func}

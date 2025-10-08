@@ -4,7 +4,6 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
-
 const PinInputField = forwardRef(
   ({ value, onChange, onFocusNext, onFocusPrev }, ref) => {
     const inputRef = useRef(null);
@@ -47,9 +46,12 @@ const PinInputField = forwardRef(
   }
 );
 
+
 const TransPinForm = ({ onSubmit }) => {
   const [pinValues, setPinValues] = useState(["", "", "", ""]);
   const inputRefs = useRef(Array(4).fill(null));
+  const [loading, setLoading] = useState(false)
+
 
   const handlePinChange = (index, value) => {
     const newPinValues = [...pinValues];
@@ -71,8 +73,11 @@ const TransPinForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+      setLoading(true)
+
     if (pinValues.every((value) => value !== "")) {
       const pin = pinValues.join("");
+      setLoading(false)
       onSubmit(pin);
     } else {
       console.log("Please fill in all PIN fields.");
@@ -98,7 +103,15 @@ const TransPinForm = ({ onSubmit }) => {
           className="bg-private rounded-md w-full text-center font-bold py-2"
           onClick={handleSubmit}
         >
-          Submit
+        
+          {loading ? (
+                      <span>
+                        Setting <i className="fas fa-spinner fa-spin"></i>
+                      </span>
+                    ) : (
+                      "Set"
+                    )}
+                  
         </button>
       </div>
     </>

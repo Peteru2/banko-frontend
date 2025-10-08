@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext.jsx";
+import Swal from "sweetalert2";
 
 
 const TransactionForm = () => {
@@ -25,19 +26,18 @@ const TransactionForm = () => {
         recipientAccountNumber,
         amount,
       });
-      if (response){
-        
-      }
       setUserTransferData(response.data.user);
-      
-      console.log(userTransferData)
-
+      console.log(response.data.user)
       if (response.data.message == "success") {
         setTrans(true);
       }
     } catch (error) {
-      toast.error(error.response.data.error);
-
+      // toast.error(error.response.data.error);
+    Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: error.response?.data?.error || "Something went wrong!",
+    });
     }
   };
   const handleSubmit = async (e) => {
@@ -50,7 +50,11 @@ const TransactionForm = () => {
         transPin,
       });
 
-      toast.success(response.data.message);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Transaction Pin updated successfully.",
+      });
       if (response.data.message == "Funds transferred successfully") {
         setTrans(false);
         setRecipientAcctNumber("");
@@ -66,9 +70,12 @@ const TransactionForm = () => {
       setAccountBalance(balResponse.data.balance);
       // Clear the form after successful transaction
     } catch (error) {
-      toast.error(error.response.data.error);
         setIcon(false);
-
+    Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: error.response?.data?.error || "Something went wrong!",
+    });
     }
   };
 
