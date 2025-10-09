@@ -7,6 +7,7 @@ import AuthContextProvider from "./component/AuthContext"
 import Deposits from './component/footer/Deposits';
 import History from './component/footer/History';
 import Profile from './views/Profile';
+import Notification from './component/Notification';
 
 
 
@@ -27,6 +28,8 @@ function App() {
               <Route path="/deposits" element={<Deposits />} />
               <Route path="/history" element={<History />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/notification" element={<Notification />} />
+
 
 
 

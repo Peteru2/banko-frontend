@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import api from "../services/api.jsx";
 import { useAuth } from "./AuthContext.jsx";
-
+import Header from "./Header.jsx";
 
 const Notification = () => {
   const {userData} = useAuth()
   const [transHis, setTransHis] = useState(null);
-  // const [userData, setUserData] = useState("");
 
   const option = {
     year: "numeric",
@@ -15,17 +14,16 @@ const Notification = () => {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    timeZone: "UTC", // Adjust the time zone as needed
+    timeZone: "UTC", 
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const userResponse = await api.get("/");
+       
         const response = await api.get("/trans-history");
 
         setTransHis(response.data.transferHistory);
-        // setUserData(userResponse.data.user);
       } catch (error) {
         if (error.response.data.error == "No history found") {
           setTransHis([]);
@@ -40,10 +38,10 @@ const Notification = () => {
 
   return (
     <>
-      <div className="flex justify-center font-roboto">
-        <div className="shadow-md justify-center w-[400px] px-4">
-          <h2 className="text-private my-4 font-bold text-[19px]">NOTICE</h2>
-
+     <div className="flex justify-center  font-roboto">
+      <div className="w-full max-w-[560px] ">
+                 <Header header="Notification" />
+         
           {transHis && transHis.length === 0 ? (
             <div>
               <h2 className="font-bold text-sm text-center ">
@@ -54,7 +52,7 @@ const Notification = () => {
             trans &&
             trans.map((transaction) =>
               userData && userData._id !== transaction.sender._id ? (
-                <div className="text-sm my-3">
+                <div className="text-sm my-3 bg-white mx-[20px] md:mx-0 p-[12px]">
                   <h2 className="text-xs text-black text-opacity-40 text-center my-2">
                     {new Date(transaction.date).toLocaleString("en-US", option)}
                   </h2>

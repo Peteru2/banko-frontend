@@ -4,34 +4,18 @@ import { useState, useEffect } from "react";
 import Notification from "../Notification";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
-
-const Navbar = ({ userData }) => {
+const Navbar = () => {
+  const {userData} = useAuth()
   const [notice, setNotice] = useState(false);
-  const [acctBalance, setAcctBalance] = useState(null); 
-  const [notificationAlert, setNotificationAlert] = useState(true); 
 
   const handleNotice = () => {
     setNotice((notice) => !notice);
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const transactionResponse = await api.get("/trans-history");
-        const response = await api.get("/balance");
-        setAcctBalance(response.data.balance);
-        if(transactionResponse.data.transferHistory =  []){
-          console.log("No history found")
-          setNotificationAlert(false)
-        }
-        
-      } catch (error) {
-        console.error("Failed to fetch user data:");
-      }
-    };
+  const hasTransactions = userData.transferHistory && userData.transferHistory.length > 0;
 
-    fetchData();
-  }, []);
+ 
   return (
     <>
       <nav className=" w-full h-12 justify-center  flex items-center font-roboto ">
@@ -47,20 +31,22 @@ const Navbar = ({ userData }) => {
           </div>
           </Link>
           <div>
-            <p className="text-black text-[16px] font-bold   text-opacity-70"> ₦{acctBalance && acctBalance.toLocaleString()}</p>
+            <p className="text-black text-[16px] font-bold   text-opacity-70"> ₦{userData?.balance?.toLocaleString()}</p>
           </div>
+          <Link to ={'/notification'}>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
             <i className="fa fa-bell  text-black"></i>
-            <span className={`${notificationAlert?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
+            <span className={`${hasTransactions?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>
+          </Link>
           </div>
         </div>
       </nav>
 
-      <div  className={ `genModal font-roboto ${notice? "modal-show w-full":""}`} >
+      {/* <div  className={ `genModal font-roboto ${notice? "modal-show w-full":""}`} >
                  <h2 onClick ={handleNotice} className='absolute top-0 cursor-pointer'><i className="fa fa-arrow-left"> </i></h2>
            <Notification />
-        </div>
+        </div> */}
     </>
   );
 };

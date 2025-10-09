@@ -65,8 +65,7 @@ const SignUp = () => {
             phoneNumber: "",
             password: "",
           });
-          // setUserId(response.data.user._id);
-          toast.success("User acccount created", { position: "top-right" });
+          // setUserId(response.data.user._id)
           Swal.fire({
               icon: "success",
               title: "Success!",

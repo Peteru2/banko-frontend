@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 import TransactionForm from "./TransactionForm.jsx";
 
 const Payment = () => {
-  const [transfer, setTransfer] = useState(false);
+  const [showTransferForm, setShowTransferForm] = useState(false);
 
-  const handleTransfer = () => {
-    setTransfer((trans) => !trans);
+  const handleShowTransferForm = () => {
+    setShowTransferForm((trans) => !trans);
   };
   const paymentList = [
     {
@@ -18,7 +18,7 @@ const Payment = () => {
       title2: "Transfer",
       url: "/",
       img: MoneyTranser,
-      func: handleTransfer,
+      func: handleShowTransferForm,
     },
     {
       title1: "Top Up",
@@ -72,15 +72,15 @@ const Payment = () => {
                 </div>
               </div>
               <div
-                className={`genModal font-roboto ${transfer ? "modal-show w-full" : ""}`}
+                className={`genModal font-roboto ${showTransferForm ? "modal-show w-full" : ""}`}
               >
                 <h2
-                  onClick={handleTransfer}
+                  onClick={handleShowTransferForm}
                   className="absolute top-0 cursor-pointer"
                 >
                   <i className="fa fa-arrow-left"> </i>
                 </h2>
-                <TransactionForm />
+                <TransactionForm handleShowTransferForm = {()=>setShowTransferForm((trans) => !trans)}/>
               </div>
               </div>
             </>

@@ -7,8 +7,8 @@ const Cards = () => {
        
             <h2 className='text-[12px]'>Cards</h2>
             <div className='flex justify-between w-full bg-white mb-[10px] rounded-[10px] p-[12px] w-full items-center'>
-                <div className='flex '>
-                    <div className='bg-private relative w-[72px] rounded-[5px] h-[42px]'>
+                <div className='flex relative'>
+                    <div className='bg-private relative w-[72px]       rounded-[5px] h-[42px]'>
                         <h2 className='absolute bottom-0 right-[10px] text-white'>UBA</h2>
                     </div>
                     <div className='pl-[12px]'>
