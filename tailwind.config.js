@@ -25,6 +25,15 @@ export default {
         playfair:['Playfair Display', 'sans-serif']
   
       },
+      keyframes: {
+        pulseGrow: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.2)' },
+        },
+      },
+      animation: {
+        pulseGrow: 'pulseGrow 1.5s ease-in-out infinite',
+      },
     extend: {
       
     },

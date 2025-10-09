@@ -10,11 +10,12 @@ const TransactionForm = ({ handleShowTransferForm }) => {
   const [transPin, setTransPin] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [recipientData, setRecipientData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // For final transfer
+  const [validating, setValidating] = useState(false); // 👈 For validation step
 
-  
   const handleSubmitValidation = async (e) => {
     e.preventDefault();
+    setValidating(true); 
     try {
       const response = await api.post("/val_transfer", {
         recipientAccountNumber,
@@ -31,14 +32,14 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         title: "Oops...",
         text: error.response?.data?.error || "Something went wrong!",
       });
+    } finally {
+      setValidating(false);
     }
   };
 
- 
   const handleTransfer = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const response = await api.post("/transfer", {
         recipientAccountNumber,
@@ -53,7 +54,6 @@ const TransactionForm = ({ handleShowTransferForm }) => {
       });
 
       if (response.data.message === "Funds transferred successfully") {
-        
         await fetchData();
         setShowConfirmModal(false);
         setRecipientAcctNumber("");
@@ -78,7 +78,6 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         <h2 className="text-center font-bold text-private">Transfer Funds</h2>
 
         <form onSubmit={handleSubmitValidation}>
-          
           <div className="my-4">
             <label htmlFor="recipientId" className="text-sm text-black text-opacity-50">
               Recipient Account:
@@ -94,7 +93,6 @@ const TransactionForm = ({ handleShowTransferForm }) => {
             />
           </div>
 
-          
           <div>
             <label htmlFor="amount" className="text-sm text-black text-opacity-50">
               Amount:
@@ -110,17 +108,23 @@ const TransactionForm = ({ handleShowTransferForm }) => {
             />
           </div>
 
-          
           <button
             type="submit"
-            className="w-full text-center bg-private mt-4 rounded-[8px] py-2 text-white"
+            disabled={validating} 
+            className="w-full text-center bg-private mt-4 rounded-[8px] py-2 text-white flex justify-center items-center"
           >
-            Proceed
+            {validating ? (
+              <span>
+                Validating <i className="fas fa-spinner fa-spin ml-1"></i>
+              </span>
+            ) : (
+              <span>Proceed</span>
+            )}
           </button>
         </form>
       </div>
 
-      
+      {/* Confirmation Modal */}
       {showConfirmModal && recipientData && (
         <div className="modal modal-show font-roboto w-[350px]">
           <div className="bg-white p-4 shadow-lg rounded-[8px]">
@@ -169,9 +173,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         </div>
       )}
 
-     
       <div className={`${showConfirmModal ? "overlay" : ""}`} />
-  
     </div>
   );
 };
