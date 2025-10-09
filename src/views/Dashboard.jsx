@@ -9,9 +9,11 @@ import Cards from '../component/Cards';
 import { ToastContainer } from "react-toastify";
 
 const Dashboard = () => {
- const {userData, logout, setUserData} = useAuth()
+ const {userData, logout, loading} = useAuth()
+ if (loading) return <div className="text-center text-[30px] mt-10">Loading...</div>;
     return ( 
         <>
+
           {userData &&(
             <div className=''>
              

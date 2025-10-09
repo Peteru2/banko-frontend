@@ -6,6 +6,8 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -19,7 +21,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const [userRes, balanceRes, historyRes] = await Promise.all([
+      const [userRes, balanceRes, historyRes] = await Promise.all([ 
         api.get("/user", { headers: { Authorization: `Bearer ${token}` } }),
         api.get("/balance"),
         api.get("/trans-history"),
@@ -37,6 +39,9 @@ export const AuthContextProvider = ({ children }) => {
         navigate("/login");
       }
     }
+    finally{
+      setLoading(false)
+  }
   };
 
   const logout = () => {
@@ -46,7 +51,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ logout, userData, fetchData, setUserData, token }}
+      value={{ logout, userData, fetchData, setUserData, token, loading }}
     >
       {children}
     </AuthContext.Provider>
