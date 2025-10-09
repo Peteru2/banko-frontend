@@ -58,6 +58,9 @@ const Login = () => {
     icon: "success",
     title: "Success!",
     text: response.data.message,
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
          
           navigate("/");
@@ -73,6 +76,9 @@ const Login = () => {
     icon: "error",
     title: "Oops...",
     text:   error.response?.data?.error,
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
              
             } else if (error.response.status === 401) {
@@ -80,6 +86,9 @@ const Login = () => {
     icon: "error",
     title: "Oops...",
     text:   error.response?.data?.error,
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
               setUserId(error.response.data.user);
             } else {
@@ -87,6 +96,9 @@ const Login = () => {
     icon: "error",
     title: "Oops...",
     text:   error.response?.data?.message,
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
             }
           } else if (error.request) {
@@ -94,6 +106,9 @@ const Login = () => {
     icon: "error",
     title: "Oops...",
     text:   "No response from the server",
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
           } else {
             console.log("Error:", error.message);
@@ -150,7 +165,7 @@ const Login = () => {
               </h2>
               <p className="text-[14px] text-gray-600 mb-6">
                 Don’t have an account?{" "}
-                <Link to={"/SignUp"} className="text-blue font-medium">
+                <Link to={"/signup"} className="text-blue font-medium">
                   Register Now
                 </Link>
               </p>

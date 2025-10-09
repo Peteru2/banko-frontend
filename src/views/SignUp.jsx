@@ -68,6 +68,9 @@ const SignUp = () => {
               icon: "success",
               title: "Success!",
               text: "User account created",
+              showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
             });
       setTimeout(() => navigate("/login"), 1100);
           setIcon(false);
@@ -77,6 +80,9 @@ const SignUp = () => {
     icon: "error",
     title: "Oops...",
     text: error.response?.data?.error ,
+    showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
           setIcon(false);
         });
@@ -98,6 +104,9 @@ const SignUp = () => {
         icon: "success",
         title: "Success!",
         text: response.data.message,
+        showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
       });
       setTimeout(() => navigate("/login"), 1100);
     } catch (error) {
@@ -105,6 +114,9 @@ const SignUp = () => {
     icon: "error",
     title: "Oops...",
     text: error.response?.data?.error ,
+    showConfirmButon: false,  
+  timer: 2000,               
+  timerProgressBar: true,
   });
       setLoading(false);
     }
@@ -127,10 +139,10 @@ const SignUp = () => {
               <img src={Logo} className="w-8 mr-2" alt="banko Logo" />
               <h2 className="text-2xl font-bold font-playfair text-private">Banko.</h2>
             </div>
-              <h2 className="text-xl md:text-2xl font-bold text-center mb-2 text-private">
+              <h2 className="text-xl md:text-2xl font-bold  mb-2 text-private">
                 Create your account
               </h2>
-              <p className="text-sm text-center mb-6">
+              <p className="text-sm  mb-6">
                 Already have an account?{" "}
                 <Link to={"/login"} className="text-blue font-semibold">
                   Login now
@@ -174,8 +186,6 @@ const SignUp = () => {
   </div>
 ))}
 
-
-              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-private font-bold text-white py-2 rounded-md hover:bg-opacity-90 transition"
@@ -190,7 +200,7 @@ const SignUp = () => {
               </button>
             </form>
 
-            {/* OTP Modal */}
+            
             {userId && (
               <div className="mt-6 p-6 bg-white rounded-lg shadow-md">
                 <h2 className="text-lg font-semibold mb-3">

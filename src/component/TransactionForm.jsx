@@ -10,9 +10,9 @@ const TransactionForm = ({ handleShowTransferForm }) => {
   const [transPin, setTransPin] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [recipientData, setRecipientData] = useState(null);
-  const [loading, setLoading] = useState(false); // For final transfer
-  const [validating, setValidating] = useState(false); // 👈 For validation step
-
+  const [loading, setLoading] = useState(false); 
+  const [validating, setValidating] = useState(false); 
+    
   const handleSubmitValidation = async (e) => {
     e.preventDefault();
     setValidating(true); 
@@ -31,6 +31,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         icon: "error",
         title: "Oops...",
         text: error.response?.data?.error || "Something went wrong!",
+        
       });
     } finally {
       setValidating(false);
@@ -51,6 +52,9 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         icon: "success",
         title: "Success!",
         text: response.data.message,
+        showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
       });
 
       if (response.data.message === "Funds transferred successfully") {
@@ -66,6 +70,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         icon: "error",
         title: "Oops...",
         text: error.response?.data?.error || "Transaction failed.",
+        
       });
     } finally {
       setLoading(false);

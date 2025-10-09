@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import api from "../services/api"
 
 const AccDetails = () => {
-  const { userData, setUserData, fetchData } = useAuth();
+  const { userData, fetchData } = useAuth();
 
   const [bvn, setBvn] = useState(false);
   const [showPinInput, setShowPinInput] = useState(false);
@@ -31,6 +31,9 @@ const AccDetails = () => {
         icon: "success",
         title: "Success!",
         text: "Transaction Pin updated successfully.",
+        showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
       });
 
       setShowPinInput(false);
@@ -40,6 +43,9 @@ const AccDetails = () => {
         icon: "error",
         title: "Oops...",
         text: "Failed to update transaction pin",
+        showConfirmButton: false,  
+  timer: 2000,               
+  timerProgressBar: true,
       });
       console.error("Failed to update transaction pin:", error);
     }
