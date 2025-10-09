@@ -44,7 +44,7 @@ const Notification = () => {
          
           {transHis && transHis.length === 0 ? (
             <div>
-              <h2 className="font-bold text-sm text-center ">
+              <h2 className="font-bold bg-white rounded-[10px] mx-[20px] md:mx-0 text-sm text-center p-[12px] ">
                 No Notification Available
               </h2>
             </div>

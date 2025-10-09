@@ -6,6 +6,7 @@ import UpdateKyc from "./UpdateKyc.jsx";
 import { TransComp } from "./TransComp.jsx";
 import Loader from "./Loader.jsx";
 import { Link } from "react-router-dom";
+import api from "../services/api"
 
 const AccDetails = () => {
   const { userData, setUserData, fetchData } = useAuth();
