@@ -12,11 +12,11 @@ export const AuthContextProvider = ({ children }) => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    } else {
-      fetchData();
-    }
+    if (token === null) {
+    navigate("/login", { replace: true });
+  } else {
+    fetchData();
+  }
   }, [token]);
 
   const fetchData = async () => {
