@@ -23,11 +23,16 @@ const Navbar = () => {
           <div className="w-full flex items-center justify-between">
             <Link to='/profile'>
           <div className="ml-[20px]">
-            <img
-              src={ProImg}
+            {userData?.profileImage? (<img
+              src={userData?.profileImage || ProImg}
               alt="profileImage"
               className=" text-black  w-[22px] h-[22px]  rounded-full"
-            />
+            />):(
+
+            <i className="fa fa-user text-black text-opacity-70 rounded-full"></i>
+
+            )}
+            
           </div>
           </Link>
           <div>
@@ -35,7 +40,7 @@ const Navbar = () => {
           </div>
           <Link to ={'/notification'}>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
-            <i className="fa fa-bell  text-black"></i>
+            <i className="fa fa-bell  text-black text-opacity-70"></i>
             <span className={`${hasTransactions?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>
           </Link>

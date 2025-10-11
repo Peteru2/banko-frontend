@@ -2,20 +2,27 @@ import React from 'react'
 import Header from '../component/Header'
 import { useAuth } from '../component/AuthContext'
 import { useState } from 'react'
+import api from '../services/api'
+import ProfileImage from '../component/ProfileImage'
 
 const Profile = () => {
-    const { logout, userData } = useAuth()
+    const { logout, userData, fetchData } = useAuth()
     const [copied, setCopied] = useState(false);
+  const [image, setImage] = useState(null); 
+ const [preview, setPreview] = useState(""); 
+ const [uploadedUrl, setUploadedUrl] = useState("");
 
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(userData.accountNum);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // reset after 2s
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy:", err);
     }
   };
+  
+  
   return (
     <div className="flex justify-center font-roboto">
         <div className=" w-full max-w-[560px] "> 
@@ -23,8 +30,11 @@ const Profile = () => {
         <Header header={'Profile'}/>
   
   <div className='mx-[20px]  '>
+
+       <ProfileImage /> 
+    
     <div className="bg-white  my-2 p-[15px]">
-      <h2>Hi, {userData.firstname} </h2>
+      <h2>Hi, {userData?.firstname} </h2>
       <div classname="font-tiny mt-[40px] ">
     <div className='text-[12px] flex mt-1 justify-between'>
       <h2>Full Name</h2>
