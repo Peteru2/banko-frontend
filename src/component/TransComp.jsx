@@ -41,8 +41,8 @@ export const TransComp = ({ trans, userData, option }) => {
             key={transaction._id}
             className="text-sm bg-white p-[14px] mx-[20px] md:mx-0 rounded-[10px] my-[6px]"
           >
-            <div className="flex w-full">
-              <h2 className="text-xs">
+           <div className="flex items-center  w-full">
+              <h2 className="font-normal text-xs truncate max-w-[220px] sm:max-w-none sm:whitespace-normal">
                 Transfer from {transaction.sender.firstname}{' '}
                 {transaction.sender.lastname}
               </h2>
