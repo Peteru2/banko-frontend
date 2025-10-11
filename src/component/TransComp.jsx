@@ -19,11 +19,12 @@ export const TransComp = ({ trans, userData, option }) => {
             key={transaction._id}
             className="text-sm bg-white p-[14px] mx-[20px] md:mx-0 rounded-[10px] my-[6px]"
           >
-            <div className="flex w-full">
-              <h2 className="font-normal text-xs">
-                Transfer to {transaction.recipient.firstname}{' '}
-                {transaction.recipient.lastname}
+            
+              <div className="flex items-center  w-full">
+              <h2 className="font-normal text-xs truncate max-w-[220px] sm:max-w-none sm:whitespace-normal">
+                Transfer to {transaction.recipient.firstname} {transaction.recipient.lastname}
               </h2>
+
               <h2 className="ml-auto font-bold">-₦{transaction.amount}.00</h2>
             </div>
             <div className="flex">

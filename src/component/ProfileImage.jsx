@@ -52,13 +52,13 @@ const ProfileImage = () => {
         <img
           src={preview || userData?.profileImage || defaultAvatar}
           alt="Profile"
-          className="w-full h-full object-cover rounded-full border-2 border-gray-200 shadow-sm"
+          className="w-full h-full object-cover rounded-full  border-gray-200 shadow-sm"
         />
         <label
           htmlFor="fileInput"
-          className="absolute bottom-1 right-1 w-10 h-10 bg-black flex items-center justify-center hover:bg-blue-700 p-2 rounded-full cursor-pointer shadow-md"
+          className="absolute bottom-1 right-[15px] w-6 h-6 bg-private flex items-center justify-center hover:bg-blue-700 p-2 rounded-full cursor-pointer shadow-md"
         >
-          <i className='fa fa-pencil text-white'></i>
+          <i className='fa fa-pencil text-white text-[12px]'></i>
         </label>
         <input
           id="fileInput"
@@ -71,7 +71,7 @@ const ProfileImage = () => {
       {preview && (
         <button
           onClick={handleUpload}
-          className="mt-3 bg-blue-600 text-white text-sm px-4 py-1.5 rounded-full hover:bg-blue-700"
+          className="mt-3 bg-blue-600 text-private text-sm px-4 py-1.5 rounded-full hover:bg-blue-700"
         >
           Save Change
         </button>
