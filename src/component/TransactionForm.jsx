@@ -17,7 +17,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
     e.preventDefault();
     setValidating(true); 
     try {
-      const response = await api.post("/val_transfer", {
+      const response = await api.post("/validateTransfer", {
         recipientAccountNumber,
         amount,
       });

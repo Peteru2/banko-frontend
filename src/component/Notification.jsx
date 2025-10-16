@@ -21,7 +21,7 @@ const Notification = () => {
     const fetchData = async () => {
       try {
        
-        const response = await api.get("/trans-history");
+        const response = await api.get("/transactionHistory");
 
         setTransHis(response.data.transferHistory);
       } catch (error) {

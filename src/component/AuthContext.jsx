@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (token === null) {
-      logout()
+    logout()
     navigate("/login", { replace: true });
   } else {
     fetchData();
@@ -44,11 +44,12 @@ export const AuthContextProvider = ({ children }) => {
     Swal.fire({
                  icon: "success",
                  title: "Success!",
-                 text: res?.data?.message,
+                 text: res?.data?.message || "User Loggod out successfully",
                  showConfirmButton: false,  
                  timer: 2000,               
                  timerProgressBar: true,
                });
+               console.log(res?.data?.message)
   } catch (err) {
     console.error("Logout failed", err);
     Swal.fire({
