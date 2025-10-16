@@ -27,7 +27,7 @@ const ProfileImage = () => {
      Swal.fire({
              icon: "success",
              title: "Success!",
-             text: "Profile Imageb Uploaded successfully!",
+             text: "Profile Image Uploaded successfully!",
              showConfirmButton: false,  
              timer: 2000,               
              timerProgressBar: true,

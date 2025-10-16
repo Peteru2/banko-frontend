@@ -12,7 +12,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
   const [recipientData, setRecipientData] = useState(null);
   const [loading, setLoading] = useState(false); 
   const [validating, setValidating] = useState(false); 
-    
+
   const handleSubmitValidation = async (e) => {
     e.preventDefault();
     setValidating(true); 
@@ -24,6 +24,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
 
       if (response.data.message === "success") {
         setRecipientData(response.data.user);
+        console.log(response.data.user)
         setShowConfirmModal(true);
       }
     } catch (error) {

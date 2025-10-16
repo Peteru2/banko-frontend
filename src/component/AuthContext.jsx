@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import api from "../services/api";
+import getUserDashboardData from "../services/userServices";
 
 export const AuthContext = createContext();
 
@@ -13,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (token === null) {
+      logout()
     navigate("/login", { replace: true });
   } else {
     fetchData();
@@ -21,18 +24,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const fetchData = async () => {
     try {
-      const [userRes, balanceRes, historyRes] = await Promise.all([ 
-        api.get("/user", { headers: { Authorization: `Bearer ${token}` } }),
-        api.get("/balance"),
-        api.get("/trans-history"),
-      ]);
+      const data = await getUserDashboardData()
+      setUserData(data);
 
-      setUserData({
-        ...userRes.data.user,
-        balance: balanceRes.data.balance,
-        accountNum: balanceRes.data.accountNum,
-        transferHistory: historyRes.data.transferHistory || [],
-      });
     } catch (error) {
       console.error("Failed to fetch user data:", error);
       if (error?.response?.status === 401) {
@@ -44,10 +38,33 @@ export const AuthContextProvider = ({ children }) => {
   }
   };
 
-  const logout = () => {
+  const logout = async () => {
+  try {
+    const res = await api.post("/logout"); 
+    Swal.fire({
+                 icon: "success",
+                 title: "Success!",
+                 text: res?.data?.message,
+                 showConfirmButton: false,  
+                 timer: 2000,               
+                 timerProgressBar: true,
+               });
+  } catch (err) {
+    console.error("Logout failed", err);
+    Swal.fire({
+                 icon: "error",
+                 title: "opps!",
+                 text: err?.response?.data?.message,
+                 showConfirmButton: false,  
+                 timer: 2000,               
+                 timerProgressBar: true,
+               });
+  } finally {
     localStorage.removeItem("token");
     navigate("/login");
-  };
+    
+  }
+};
 
   return (
     <AuthContext.Provider
