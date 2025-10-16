@@ -15,7 +15,6 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (token === null) {
-    logout()
     navigate("/login", { replace: true });
   } else {
     fetchData();
