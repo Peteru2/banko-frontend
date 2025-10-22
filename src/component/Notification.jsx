@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api.jsx";
-import { useAuth } from "./AuthContext.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
+
 import Header from "./Header.jsx";
 
 const Notification = () => {

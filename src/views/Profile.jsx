@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../component/Header'
-import { useAuth } from '../component/AuthContext'
+import { useAuth } from '../auth/AuthContext'
 import { useState } from 'react'
 import api from '../services/api'
 import ProfileImage from '../component/ProfileImage'

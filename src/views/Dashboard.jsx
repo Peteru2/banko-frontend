@@ -4,7 +4,7 @@ import Navbar from '../component/navbar/Navbar';
 import Payment from '../component/Payment';
 import Loader from '../component/Loader';
 import AccDetails from '../component/AccDetails';
-import { useAuth } from '../component/AuthContext';
+import { useAuth } from '../auth/AuthContext';
 import Cards from '../component/Cards';
 import imageLoader from "../assets/image/Logo.png" 
 

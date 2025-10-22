@@ -37,6 +37,34 @@ export const AuthContextProvider = ({ children }) => {
   }
   };
 
+  const login = async (data) => {
+  try {
+    localStorage.setItem("token", data.token);
+    if (data.user) {
+      setUserData(data.user);
+    }
+    Swal.fire({
+      icon: "success",
+      title: "Welcome!",
+      text: `Hello, ${data?.user?.fullname || "User"}`,
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    });
+
+    navigate("/");
+  } catch (err) {
+    console.error("Login failed:", err);
+    Swal.fire({
+      icon: "error",
+      title: "Oops!",
+      text: "Login failed. Please try again.",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    });
+  }
+};
   const logout = async () => {
   try {
     const res = await api.post("/logout"); 
@@ -68,7 +96,15 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ logout, userData, fetchData, setUserData, token, loading }}
+      value={{  
+        login, 
+        logout, 
+        userData, 
+        fetchData, 
+        setUserData, 
+        token, 
+        loading 
+      }}
     >
       {children}
     </AuthContext.Provider>

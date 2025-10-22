@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../auth/AuthContext.jsx";
 import Swal from "sweetalert2";
 import api from "../services/api";
 import defaultAvatar from "../assets/image/defaultAvatar.jpeg" 

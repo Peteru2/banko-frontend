@@ -6,8 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Logo from "../assets/image/Logo.png";
 import SideView from "../component/sideView";
 import api from "../services/api";
-import { useAuth } from "../component/AuthContext";
+import { useAuth } from "../auth/AuthContext";
 import Swal from "sweetalert2";
+import GoogleAuth from "../auth/GoogleAuth"
 
 const Login = () => {
   const navigate = useNavigate();
@@ -261,7 +262,14 @@ const Login = () => {
                 </div>
               </div>
             )}
+            <div className='text-center flex justify-center '>
+              <div>
+             or 
+          <GoogleAuth />
           </div>
+          </div>
+          </div>
+         
         </section>
 
         {/* Side Image/Content on Desktop */}

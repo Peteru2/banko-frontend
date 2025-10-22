@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { TransComp } from "./TransComp";
 import Loader from "./Loader";
 import Header from "./Header";

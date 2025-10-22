@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { useAuth } from "./AuthContext.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import TransPinForm from "./TransPinForm.jsx";
 import UpdateKyc from "./UpdateKyc.jsx";
 import { TransComp } from "./TransComp.jsx";

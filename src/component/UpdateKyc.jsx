@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import api from "../services/api.jsx";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useAuth } from "./AuthContext.jsx";
+import { useAuth } from "../auth/AuthContext.jsx";
 import Swal from "sweetalert2";
 
 const UpdateKyc = ({ onClose }) => {

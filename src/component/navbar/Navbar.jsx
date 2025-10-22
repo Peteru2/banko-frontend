@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Notification from "../Notification";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../auth/AuthContext";
 
 const Navbar = () => {
   const {userData} = useAuth()
