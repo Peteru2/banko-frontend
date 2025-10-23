@@ -7,20 +7,27 @@ import { TransComp } from "./TransComp.jsx";
 import Loader from "./Loader.jsx";
 import { Link } from "react-router-dom";
 import api from "../services/api"
+import UpdatePhoneNumber from './UpdatePhoneNumber.jsx'
 
 const AccDetails = () => {
   const { userData, fetchData } = useAuth();
 
   const [bvn, setBvn] = useState(false);
   const [showPinInput, setShowPinInput] = useState(false);
+  const [showUpdatePhoneNumber, setShowUpdatePhoneNumber] = useState(false);
+  
 
   useEffect(() => {
     if (userData && userData.transactionPin === "0") {
       setShowPinInput(true);
-      console.log("Transaction pin not set — showing modal");
     } else {
       setShowPinInput(false);
     }
+    
+    if(userData && userData.phoneNumber === "" ){
+      setShowUpdatePhoneNumber(true)
+    }
+   
   }, [userData]);
 
   const handleSubmitTransactionPin = async (pin) => {
@@ -99,6 +106,14 @@ const AccDetails = () => {
           </form>
         )}
 
+      {showUpdatePhoneNumber && (
+            <div className="modal w-[300px] font-roboto modal-show">
+            <div className="bg-white p-4 rounded-[6px]">
+              <h2 className="text-19px text-center">Input your Phone Number</h2>
+              <UpdatePhoneNumber setShowUpdatePhoneNumber= {setShowUpdatePhoneNumber} />
+            </div>
+          </div>
+      )}
         
         {bvn && (
           <div className="modal font-roboto modal-show">
@@ -106,7 +121,7 @@ const AccDetails = () => {
           </div>
         )}
 
-        {(showPinInput || bvn) && <div className="overlay"></div>}
+        {(showPinInput || bvn || showUpdatePhoneNumber) && <div className="overlay"></div>}
         <div className="flex justify-between mx-[20px] md:mx-0 mt-4">
           <p className="md:text-[18px] text-black text-opacity-70">
             Latest transactions
