@@ -34,7 +34,7 @@ const AccDetails = () => {
     try {
       const response = await api.put("/updateTransactionPin", { pin });
 
-      Swal.fire({
+       Swal.fire({
         icon: "success",
         title: "Success!",
         text: "Transaction Pin updated successfully.",
@@ -42,6 +42,7 @@ const AccDetails = () => {
   timer: 2000,               
   timerProgressBar: true,
       });
+
 
       setShowPinInput(false);
       await fetchData(); 

@@ -73,14 +73,15 @@ const TransPinForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      setLoading(true)
 
     if (pinValues.every((value) => value !== "")) {
       const pin = pinValues.join("");
-      setLoading(false)
+      setLoading(true)
       onSubmit(pin);
     } else {
       console.log("Please fill in all PIN fields.");
+      setLoading(false)
+
     }
   };
 
@@ -100,7 +101,7 @@ const TransPinForm = ({ onSubmit }) => {
           ))}
         </div>
         <button
-          className="bg-private rounded-md w-full text-center font-bold py-2"
+          className="bg-private rounded-md w-full text-center text-white py-2"
           onClick={handleSubmit}
         >
         
@@ -109,7 +110,7 @@ const TransPinForm = ({ onSubmit }) => {
                         Setting <i className="fas fa-spinner fa-spin"></i>
                       </span>
                     ) : (
-                      "Set"
+                      <span>Set</span>
                     )}
                   
         </button>
