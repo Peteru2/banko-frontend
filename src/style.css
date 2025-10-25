@@ -43,6 +43,8 @@ body{
     padding: 20px;
     box-shadow: 10px 5px 40px 14px rgba(38.81, 136.75, 227.16, 0.13);
     z-index: 999;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
   
   }
 

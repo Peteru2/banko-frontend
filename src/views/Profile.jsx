@@ -4,6 +4,7 @@ import { useAuth } from '../auth/AuthContext'
 import { useState } from 'react'
 import api from '../services/api'
 import ProfileImage from '../component/ProfileImage'
+import ThemeToggle from '../component/ThemeToggle'
 
 const Profile = () => {
     const { logout, userData, fetchData } = useAuth()
@@ -67,9 +68,8 @@ const Profile = () => {
 
         </button>
    
-   {/* <form className="">
-        <input type="file" />
-   </form> */}
+          <ThemeToggle />
+  
   </div>
     </div>
     </div>

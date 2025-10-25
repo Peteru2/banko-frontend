@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <>
       <nav className=" w-full h-12 justify-center  flex items-center font-roboto ">
-        <div className=" flex w-full max-w-[600px] bg-bg mb-[100px]  fixed top-0 h-[48px] rounded-md rounded-b-[0px] border-b-[1px] border-gray items-center">
+        <div className=" flex w-full max-w-[600px] dark:bg-darkGray bg-bg mb-[100px]  fixed top-0 h-[48px] rounded-md rounded-b-[0px] border-b-[1px] border-gray items-center">
           <div className="w-full flex items-center justify-between">
             <Link to='/profile'>
           <div className="ml-[20px]">
@@ -40,7 +40,7 @@ const Navbar = () => {
           </div>
           <Link to ={'/notification'}>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
-            <i className="fa fa-bell  text-black text-opacity-70"></i>
+            <i className="fa fa-bell text-black text-opacity-70"></i>
             <span className={`${hasTransactions?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>
           </Link>

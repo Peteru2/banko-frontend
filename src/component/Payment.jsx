@@ -48,7 +48,7 @@ const Payment = () => {
   ];
   return (
     <>
-      <div className="flex  gap-4 md:gap-8 w-full   justify-center my-[15px] md:px-[13px]">
+      <div className="flex  gap-4 md:gap-8 w-full dark:bg-darkGray  justify-center py-[15px] md:px-[13px]">
         {paymentList.map((item, index) => {
           return (
             <>
@@ -65,7 +65,7 @@ const Payment = () => {
                       className="text-black  w-[60px] h-[60px]  rounded-full"
                     />
                   </div>
-                  <div className="text-center text-[13px]">
+                  <div className="text-center  text-[13px]">
                     <p>{item.title1}</p>
                     <p>{item.title2}</p>
                   </div>

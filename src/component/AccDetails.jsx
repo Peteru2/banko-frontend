@@ -8,6 +8,7 @@ import Loader from "./Loader.jsx";
 import { Link } from "react-router-dom";
 import api from "../services/api"
 import UpdatePhoneNumber from './UpdatePhoneNumber.jsx'
+import ThemeToggle from "./ThemeToggle.jsx";
 
 const AccDetails = () => {
   const { userData, fetchData } = useAuth();

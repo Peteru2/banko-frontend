@@ -31,11 +31,10 @@ const Dashboard = () => {
         <>
         
 
-
           {userData &&(
             <div className=''>
              
-              <div>
+              <div className='dark:bg-darkGray'>
                 <Navbar userData={userData} />
                 {userData?(
                   <div className=''>
