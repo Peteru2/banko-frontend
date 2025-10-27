@@ -50,7 +50,7 @@ const Footer = ({ userData }) => {
   return (
     <>
       <div className="justify-center items-center flex mt-[100px]">
-        <aside className="bg-white fixed  w-full max-w-[600px]  bottom-0 rounded-tr-[10px] rounded-tl-[10px]">
+        <aside className="bg-white dark:bg-darkGray fixed  w-full max-w-[600px] bottom-0 rounded-tr-[10px] rounded-tl-[10px]">
           <div className=" text-black w-full items-center md:px-12 px-[20px] justify-between flex  text-opacity-50 ">
             {navSideList.map((item, index) => {
               const isActive = location.pathname === item.url;

@@ -132,7 +132,7 @@ const AccDetails = () => {
             <p className="text-private">View all</p>
           </Link>
         </div>
-
+        
         <TransComp
           transHis={userData.transferHistory}
           trans={trans.slice(0, 3)}

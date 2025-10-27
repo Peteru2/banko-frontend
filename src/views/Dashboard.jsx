@@ -7,6 +7,7 @@ import AccDetails from '../component/AccDetails';
 import { useAuth } from '../auth/AuthContext';
 import Cards from '../component/Cards';
 import imageLoader from "../assets/image/Logo.png" 
+import Layout from './Layout';
 
 
 const Dashboard = () => {
@@ -32,15 +33,15 @@ const Dashboard = () => {
         
 
           {userData &&(
-            <div className=''>
+           
              
-              <div className='dark:bg-darkGray'>
-                <Navbar userData={userData} />
+                <Layout>  
+              
                 {userData?(
                   <div className=''>
                 <Payment />
                 <Cards />
-                <AccDetails userData={userData} logout={logout}  />
+                <AccDetails  />
                 </div>
                 ):(
                   <div className="flex justify-center">
@@ -49,10 +50,7 @@ const Dashboard = () => {
                 )}
                 
 
-                <Footer  userData={userData} />
-                </div>
-                
-            </div>
+                </Layout>
 
              )}
 

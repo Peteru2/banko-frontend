@@ -24,7 +24,7 @@ const toggleTheme = () =>{
 
     document.documentElement.classList.remove(theme)
     document.documentElement.classList.add(newTheme)
-    localStorage.setItem(newTheme)
+    localStorage.setItem("theme" ,  newTheme)
 }
 return(
     <ThemeContext.Provider value = {{theme, toggleTheme}}>
