@@ -22,7 +22,7 @@ const AnimatedRoutes = () => {
           initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -100, opacity: 0 }}
-          transition={{ duration: 0.25, ease: "easeInOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="absolute top-0 left-0 w-full min-h-screen overflow-hidden"
         >
           <Routes location={location}>
