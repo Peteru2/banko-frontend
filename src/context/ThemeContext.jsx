@@ -10,6 +10,7 @@ useEffect(()=>{
     if (storedTheme) {
         setTheme(storedTheme)
         document.documentElement.classList.add(storedTheme)
+        document.body.setAttribute('data-theme', storedTheme);
     }
     else{
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -17,6 +18,10 @@ useEffect(()=>{
         document.documentElement.classList.add(prefersDark ? "dark" : "light");
     }
 }, [])
+
+useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+  }, [theme]);
 
 const toggleTheme = () =>{
     const newTheme = theme === "light"? "dark":"light"

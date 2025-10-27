@@ -11,7 +11,7 @@ import Layout from './Layout';
 
 
 const Dashboard = () => {
- const {userData, logout, loading} = useAuth()
+ const {userData} = useAuth()
  if (!userData) return (
  <div className="h-screen flex justify-center items-center w-full text-center overlay">
   <div className="flex flex-col items-center justify-center">
@@ -35,8 +35,8 @@ const Dashboard = () => {
           {userData &&(
            
              
-                <Layout>  
-              
+                <Layout >   
+              <div className="">
                 {userData?(
                   <div className=''>
                 <Payment />
@@ -49,7 +49,7 @@ const Dashboard = () => {
                   </div>
                 )}
                 
-
+      </div>
                 </Layout>
 
              )}

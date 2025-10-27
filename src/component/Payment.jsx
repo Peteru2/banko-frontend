@@ -48,11 +48,13 @@ const Payment = () => {
   ];
   return (
     <>
-      <div className="flex  gap-4 md:gap-8 w-full dark:bg-darkGray  justify-center py-[15px] md:px-[13px]">
-        {paymentList.map((item, index) => {
+     
+         <div className="w-full justify-center flex font-roboto">
+      <div className="flex w-full max-w-[560px] gap-4 md:gap-8 justify-center  dark:bg-darkGray py-[15px] md:px-[13px]">
+        {paymentList.map((item, index) => { 
           return (
             <>
-            <div key={index} className=" max-w-[600px]">
+            <div key={index} className=" ">
               <div
                 className={`${item.func===""?"":"cursor-pointer"} "flex   justify-center"`}
                 onClick={item.func}
@@ -86,6 +88,7 @@ const Payment = () => {
             </>
           );
         })}
+      </div>
       </div>
     </>
   );

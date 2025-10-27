@@ -34,7 +34,7 @@ const AnimatedRoutes = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/notification" element={<Notification />} />
           </Routes>
-        </motion.div>8166578546
+        </motion.div>
       </AnimatePresence>
     </div>
  

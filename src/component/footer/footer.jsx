@@ -65,6 +65,7 @@ const Footer = ({ userData }) => {
                   >
                     <div className="flex flex-col items-center">
                       <div className=" ">
+                        <i className="fa fa-grip"></i>
                         <img
                           src={
                             isActive
