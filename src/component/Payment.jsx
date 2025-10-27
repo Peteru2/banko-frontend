@@ -76,9 +76,9 @@ const Payment = () => {
               >
                 <h2
                   onClick={handleShowTransferForm}
-                  className="absolute top-0 cursor-pointer"
+                  className="absolute top-4 cursor-pointer"
                 >
-                  <i className="fa fa-arrow-left"> </i>
+                  <i className="fa fa-arrow-left  text-black text-opacity-70 "> </i>
                 </h2>
                 <TransactionForm handleShowTransferForm = {()=>setShowTransferForm((trans) => !trans)}/>
               </div>

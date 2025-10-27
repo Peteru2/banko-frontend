@@ -34,15 +34,16 @@ body{
     border-radius: 20px;
   }
   .genModal{
+    width:cover;
+    max-width: 600px;
     position: fixed!important;
     left: 50%;  
     top: 50%;
     height: 100%;
     transform: translate(-50%,-50%) scale(0)  ;
     transition: 30ms ease-in-out;
-    background-color: #fff;
+    background-color: #fff  ; 
     padding: 20px;
-    box-shadow: 10px 5px 40px 14px rgba(38.81, 136.75, 227.16, 0.13);
     z-index: 999;
     transition: transform 0.3s ease, opacity 0.3s ease;
 
