@@ -57,7 +57,7 @@ const Footer = ({ userData }) => {
               return (
                 <div
                   key={index}
-                  className={` text-sm py-4 flex justify-between ${location.pathname === item.url ? " text-text" : ""} `}
+                  className={` text-sm md:py-4 py-2 flex justify-between ${location.pathname === item.url ? " text-text" : ""} `}
                 >
                   <Link
                     to={item.url}
@@ -78,7 +78,7 @@ const Footer = ({ userData }) => {
                       </div>
                       <p
                         className={`
-                      text-[11px] text-black dark: text-white text-opacity-80 font-400 ${location.pathname === item.url ? " text-tet font-500" : ""}
+                      text-[11px] text-black dark:text-white text-opacity-80 font-400 ${location.pathname === item.url ? " text-tet font-500" : ""}
                     `}
                       >
                         {item.title}

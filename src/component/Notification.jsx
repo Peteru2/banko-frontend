@@ -45,7 +45,7 @@ const Notification = () => {
          
           {transHis && transHis.length === 0 ? (
             <div>
-              <h2 className="font-bold bg-white rounded-[10px] mx-[20px] md:mx-0 text-sm text-center p-[12px] ">
+              <h2 className="font-bold bg-white dark:bg-darkGray rounded-[10px] mx-[20px] md:mx-0 text-sm text-center p-[12px] ">
                 No Notification Available
               </h2>
             </div>
@@ -53,17 +53,17 @@ const Notification = () => {
             trans &&
             trans.map((transaction) =>
               userData && userData._id !== transaction.sender._id ? (
-                <div className="text-sm my-3 bg-white mx-[20px] md:mx-0 p-[12px]">
-                  <h2 className="text-xs text-black text-opacity-40 text-center my-2">
+                <div className="text-sm my-3 bg-white dark:bg-darkGray mx-[20px] rounded-[10px] md:mx-0 p-[12px]">
+                  <h2 className="text-xs text-black dark:text-white  dark:text-opacity-50 text-opacity-40 text-center my-2">
                     {new Date(transaction.date).toLocaleString("en-US", option)}
                   </h2>
                   <p>
-                    <h2 className="font-bold text-xs">
+                    <h2 className="font-bold dark:text-white text-xs">
                       Account successfully Credited
                     </h2>
 
                     <div className="flex items-center">
-                      <h2 className="text-black text-opacity-60 text-[13px]">
+                      <h2 className="text-black dark:text-white dark:text-opacity-50 text-opacity-60 text-[13px]">
                         {" "}
                         Banko user{" "}
                         <span className="uppercase">
