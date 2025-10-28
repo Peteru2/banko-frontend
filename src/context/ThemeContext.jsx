@@ -29,6 +29,7 @@ const toggleTheme = () =>{
 
     document.documentElement.classList.remove(theme)
     document.documentElement.classList.add(newTheme)
+    document.body.setAttribute("data-theme", newTheme);
     localStorage.setItem("theme" ,  newTheme)
 }
 return(
