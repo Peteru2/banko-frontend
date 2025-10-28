@@ -125,14 +125,14 @@ const AccDetails = () => {
 
         {(showPinInput || bvn || showUpdatePhoneNumber) && <div className="overlay"></div>}
         <div className="flex justify-between mx-[20px] md:mx-0 mt-4">
-          <p className="md:text-[18px] text-black text-opacity-70">
+          <p className="md:text-[18px] text-black dark:text-white text-opacity-70">
             Latest transactions
           </p>
           <Link to="/History">
             <p className="text-private">View all</p>
           </Link>
         </div>
-        
+
         <TransComp
           transHis={userData.transferHistory}
           trans={trans.slice(0, 3)}

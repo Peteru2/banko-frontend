@@ -50,7 +50,7 @@ const Payment = () => {
     <>
      
          <div className="w-full justify-center flex font-roboto">
-      <div className="flex w-full max-w-[560px] gap-4 md:gap-8 justify-center  dark:bg-darkGray py-[15px] md:px-[13px]">
+      <div className="flex w-full max-w-[560px] gap-4 md:gap-8 justify-center   py-[15px] md:px-[13px]">
         {paymentList.map((item, index) => { 
           return (
             <>
@@ -64,10 +64,10 @@ const Payment = () => {
                     <img
                       src={item.img}
                       alt="profileImage"
-                      className="text-black  w-[60px] h-[60px]  rounded-full"
+                      className="text-black dark:text-white  w-[60px] h-[60px]  rounded-full"
                     />
                   </div>
-                  <div className="text-center  text-[13px]">
+                  <div className="text-center dark:text-white  text-[13px]">
                     <p>{item.title1}</p>
                     <p>{item.title2}</p>
                   </div>

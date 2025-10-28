@@ -31,7 +31,7 @@ const Profile = () => {
         <div className="mx-[20px]  ">
           <ProfileImage />
 
-          <div className="bg-white  my-2 p-[15px]">
+          <div className="bg-white dark:bg-darkGray dark:text-white my-2 p-[15px]">
             <h2>Hi, {userData?.firstname} </h2>
             <div classname="font-tiny mt-[40px] ">
               <div className="text-[12px] flex mt-1 justify-between">
@@ -61,7 +61,7 @@ const Profile = () => {
           </div>
           <button
             onClick={logout}
-            className="w-full bg-white text-left outline-none shadow rounded-[5px]  p-[15px] text-red "
+            className="w-full bg-white text-left dark:bg-darkGray outline-none shadow rounded-[5px]  p-[15px] text-red "
           >
             <i className="fa fa-sign-out"></i> Logout
           </button>

@@ -3,7 +3,7 @@
 }
 
 [data-theme='dark'] {
-  --bg-color: #B3B3B3;
+  --bg-color: #171717;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -14,7 +14,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 body{
   background-color: var(--bg-color);
-  overflow:hidden
+  overflow-x:hidden
 }
 
 .sideBar{

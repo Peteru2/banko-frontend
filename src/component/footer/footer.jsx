@@ -73,12 +73,12 @@ const Footer = ({ userData }) => {
                               : item.inactive
                           }
                           alt="Image"
-                          className="  text-private w-[23px] h-[23px] "
+                          className=" dark:shadow-[2px] shadow-white  text-private w-[23px] h-[23px] "
                         />
                       </div>
                       <p
                         className={`
-                      text-[11px] text-black text-opacity-80 font-400 ${location.pathname === item.url ? " text-tet " : ""}
+                      text-[11px] text-black dark: text-white text-opacity-80 font-400 ${location.pathname === item.url ? " text-tet font-500" : ""}
                     `}
                       >
                         {item.title}

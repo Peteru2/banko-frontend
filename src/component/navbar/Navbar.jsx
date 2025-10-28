@@ -36,11 +36,11 @@ const Navbar = () => {
           </div>
           </Link>
           <div>
-            <p className="text-black text-[16px] font-bold   text-opacity-70"> ₦{userData?.balance?.toLocaleString()}</p>
+            <p className="text-black text-[16px] font-bold dark:text-white  text-opacity-70"> ₦{userData?.balance?.toLocaleString()}</p>
           </div>
           <Link to ={'/notification'}>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
-            <i className="fa fa-bell text-black text-opacity-70"></i>
+            <i className="fa fa-bell text-black dark:text-white text-opacity-70"></i>
             <span className={`${hasTransactions?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>
           </Link>

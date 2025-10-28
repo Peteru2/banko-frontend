@@ -13,7 +13,7 @@ export default {
         'white': '#ffffff',
         'black':'#000000',
         'gray':'#c7c6c1',
-        'darkGray':'#B3B3B3',
+        'darkGray':'#262626',
         'red':'#FF0000',
         'vintage':'#540202',    
         'grayLight':'#ececec',
