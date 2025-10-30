@@ -3,6 +3,7 @@
   import AuthContextProvider from "./auth/AuthContext";
   import { ThemeProvider } from "./context/ThemeContext";
   import AnimatedRoutes from "./AnimatedRoutes";
+  
   import "./style.css";
   
   function App() {

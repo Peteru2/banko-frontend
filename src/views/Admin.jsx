@@ -18,9 +18,6 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-// BankooAdminDashboard.jsx
-// Tailwind CSS + Recharts + Responsive sidebar
-
 export default function Admin() {
   const token = "REPLACE_WITH_TOKEN_FROM_AUTH_CONTEXT";
 
@@ -164,7 +161,7 @@ export default function Admin() {
                 <div className="text-lg font-semibold">Bankoo</div>
               </div>
 
-              {/* Close button on mobile */}
+           
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="lg:hidden text-gray-500 dark:text-gray-300"
@@ -211,12 +208,12 @@ export default function Admin() {
             ></div>
           )}
 
-          {/* Main content */}
+          
           <main className="flex-1 w-full">
-            {/* Header */}
+            
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
               <div className="flex items-center gap-3">
-                {/* Hamburger */}
+                
                 <button
                   onClick={() => setSidebarOpen(true)}
                   className="lg:hidden p-2 rounded-md bg-gray-100 dark:bg-neutral-800"
@@ -234,7 +231,7 @@ export default function Admin() {
               </div>
             </div>
 
-            {/* Stat cards */}
+       
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <StatCard
                 label="Total Users"

@@ -19,7 +19,7 @@ const Dashboard = () => {
         <img
           src={imageLoader}
           alt="loading.."
-          className="w-[60px] md:w-[80px] border-1 border-private rounded-full mb-3 animate-pulseGrow"
+          className="w-[60px] md:w-[80px] border border-private rounded-full mb-3 animate-pulseGrow"
         />
         <h2 className="text-public text-[14px] font-bold font-lora">
           Bank With Ease.

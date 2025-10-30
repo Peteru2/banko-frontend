@@ -11,6 +11,7 @@ import SignUp from "./views/SignUp";
   import Admin from './views/Admin';
   import { AnimatePresence, motion } from "framer-motion";
   import { useLocation } from "react-router-dom";
+  import ProtectedRoutes from './component/ProtectedRoutes';
  
 const AnimatedRoutes = () => {
     const location = useLocation()
@@ -34,8 +35,17 @@ const AnimatedRoutes = () => {
             <Route path="/history" element={<History />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/notification" element={<Notification />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedRoutes requiredRole="admin">
+                  <Admin />
+                </ProtectedRoutes>
+              } 
+            />
 
+              
+              
           </Routes>
         </motion.div>
       </AnimatePresence>
