@@ -22,6 +22,8 @@ export const AuthContextProvider = ({ children }) => {
   }, [token]);
 
   const fetchData = async () => {
+      setLoading(true)
+
     try {
       const data = await getUserDashboardData()
       setUserData(data);
