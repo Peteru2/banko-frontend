@@ -1,14 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Logo from "../assets/image/Logo.png";
 import SideView from "../component/sideView";
 import api from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import Swal from "sweetalert2";
-import GoogleAuth from "../auth/GoogleAuth"
+import GoogleAuth from "../auth/GoogleAuth";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,17 +17,13 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const { setUserData } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
-  
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -56,169 +51,141 @@ const Login = () => {
           const { token } = response.data;
           localStorage.setItem("token", token);
           Swal.fire({
-    icon: "success",
-    title: "Success!",
-    text: response.data.message,
-    showConfirmButton: false,  
-  timer: 2000,               
-  timerProgressBar: true,
-  });
-         
+            icon: "success",
+            title: "Welcome Back!",
+            text: response.data.message,
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
           navigate("/");
           setUserData(response.data.user);
-
           setFormData({ email: "", password: "" });
           setIcon(false);
         })
         .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 404) {
-              Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text:   error.response?.data?.error,
-    showConfirmButton: false,  
-  timer: 2000,               
-  timerProgressBar: true,
-  });
-             
-            } else if (error.response.status === 401) {
-              Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text:   error.response?.data?.error,
-    showConfirmButton: false,  
-  timer: 2000,               
-  timerProgressBar: true,
-  });
-              setUserId(error.response.data.user);
-            } else {
-             Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text:   error.response?.data?.message,
-    showConfirmButton: false,  
-  timer: 2000,               
-  timerProgressBar: true,
-  });
-            }
-          } else if (error.request) {
-            Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text:   "No response from the server",
-    showConfirmButton: false,  
-  timer: 2000,               
-  timerProgressBar: true,
-  });
-          } else {
-            console.log("Error:", error.message);
-          }
+          const errMsg =
+            error.response?.data?.error ||
+            error.response?.data?.message ||
+            "Login failed";
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errMsg,
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+          });
           setIcon(false);
         });
     }
-
     setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      setErrors({});
-    }
   };
 
   const handleVerify = async () => {
     try {
       setLoading(true);
-      const response = await api.post("/verifyEmail", { userId, emailVerificationCode });
+      const response = await api.post("/verifyEmail", {
+        userId,
+        emailVerificationCode,
+      });
       setUserId("");
       setEmailVerificationCode("");
       Swal.fire({
-    icon: "success",
-    title: "Success!",
-    text: response.data.message,
-  });
-    
+        icon: "success",
+        title: "Success!",
+        text: response.data.message,
+      });
       navigate("/login");
     } catch (error) {
       Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text:   error.response?.data?.error,
-  });
+        icon: "error",
+        title: "Oops...",
+        text: error.response?.data?.error,
+      });
       setLoading(false);
     }
   };
 
   return (
     <>
-      <div className="flex min-h-screen">
-        {/* Centered card on small screens */}
-        <section className="flex flex-1 items-center justify-center bg-gray-50 md:bg-transparent">
-          <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 md:p-8">
-            <div className="flex items-center mb-6">
-              <img src={Logo} className="w-8 mr-2" alt="banko Logo" />
-              <h2 className="text-[26px] text-private font-bold font-playfair">
-                Banko.
-              </h2>
-            </div>
+      <div className="flex min-h-screen bg-grayLight dark:bg-neutral-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+       
+        <section className="flex flex-1 items-center justify-center p-6 sm:p-10">
+          <div className="w-full max-w-md bg-white dark:bg-neutral-800 rounded-2xl shadow-lg border border-gray-100 dark:border-neutral-700 p-6 sm:p-8 space-y-6">
+            {/* Logo + Title */}
+            <div className="flex items-center  gap-1">
+                <div className="h-10 w-10 rounded-md bg-private flex items-center justify-center text-white font-bold">
+                  B
+                </div>
+                <div className="text-lg font-bold">Bankoo</div>
+                </div>
 
-            <form onSubmit={handleSubmit} className="font-roboto w-full text-black">
-              <h2 className="my-2 text-opacity-70 text-black text-[24px] font-semibold">  
-                Log in to your account
-              </h2>
-              <p className="text-[14px] text-gray-600 mb-6">
-                Don’t have an account?{" "}
-                <Link to={"/signup"} className="text-blue font-medium">
-                  Register Now
-                </Link>
-              </p>
+            <h1 className="text-xl font-semibold mb-2">Welcome Back</h1>
+            <p className="text-gray-500 dark:text-neutral-400 text-sm">
+              Log in to access your Bankoo account.
+            </p>
 
-              {/* Email */}
-              <div className="mb-4">
-                <label className="text-[14px] text-opacity-70 text-black font-bold flex justify-between">
-                  <span>Email</span>
-                  <span className="text-red">{errors.email}</span>
+         
+            <form onSubmit={handleSubmit} className="space-y-5 font-roboto">
+           
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Email
+                  {errors.email && (
+                    <span className="text-red text-xs ml-1">
+                      • {errors.email}
+                    </span>
+                  )}
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full outline-none border border-gray rounded-md px-3 py-2 mt-1 text-black"
-                  placeholder="johndoe@gmail.com"
+                  className="w-full px-4 py-2 rounded-md border border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-900 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                  placeholder="you@example.com"
                 />
               </div>
 
-              {/* Password */}
-              <div className="mb-6">
-                <label className="text-[14px] text-opacity-70 text-black font-bold flex justify-between">
-                  <span>Password</span>
-                  <span className="text-red">{errors.password}</span>
+            
+              <div>
+                <label className="block text-sm font-medium mb-1">
+                  Password
+                  {errors.password && (
+                    <span className="text-red text-xs ml-1">
+                      • {errors.password}
+                    </span>
+                  )}
                 </label>
-                <div className="border relative flex border-gray rounded-md px-3 py-2 mt-1 text-black">
-                <input
-                  type={showPassword?"text":"password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full outline-none "
-                  placeholder="Password"
-                />
-                 <button
-        type="button"
-        onClick={() => setShowPassword((prev) => !prev)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-opacity-70 text-black hover:text-black"
-      >
-        <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
-      </button>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 rounded-md border border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-900 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+                    placeholder="Enter your password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <i className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                  </button>
                 </div>
               </div>
 
+         
               <button
                 type="submit"
-                className="w-full bg-private   transition-all text-white font-bold py-2 rounded-md shadow-md"
+                disabled={icon}
+                className="w-full bg-private text-white font-semibold py-2.5 rounded-md transition-all shadow-sm"
               >
                 {icon ? (
                   <span>
-                    Submitting <i className="fas fa-spinner fa-spin"></i>
+                    Signing in <i className="fas fa-spinner fa-spin ml-1"></i>
                   </span>
                 ) : (
                   "Login"
@@ -226,59 +193,69 @@ const Login = () => {
               </button>
             </form>
 
-            {/* Verification Modal */}
-            {userId && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md relative">
-                  <button
-                    className="absolute top-3 right-3 text-gray-600"
-                    onClick={() => setUserId("")}
-                  >
-                    ✕
-                  </button>
-                  <h2 className="text-lg mb-4">
-                    Your account has not been verified, please verify your account
-                  </h2>
-                  <input
-                    type="text"
-                    className="w-full border rounded-md px-3 py-2 mb-4"
-                    placeholder="Your Code"
-                    value={emailVerificationCode}
-                    onChange={(e) => setEmailVerificationCode(e.target.value)}
-                  />
-                  <button
-                    onClick={handleVerify}
-                    disabled={loading}
-                    className="w-full bg-private text-white py-2 rounded-md"
-                  >
-                    {loading ? (
-                      <span>
-                        Verifying <i className="fas fa-spinner fa-spin"></i>
-                      </span>
-                    ) : (
-                      "Verify Email"
-                    )}
-                  </button>
-                </div>
-              </div>
-            )}
-            <div className='text-center flex justify-center '>
-              <div>
-             or 
-          <GoogleAuth />
+    
+            <div className="flex items-center justify-center text-gray-500 dark:text-gray-400 text-sm mt-4">
+              <span className="mx-2">or</span>
+            </div>
+            <div className="flex justify-center">
+              <GoogleAuth />
+            </div>
+
+            {/* Register link */}
+            <p className="text-center text-sm text-gray-500 dark:text-neutral-400">
+              Don’t have an account?{" "}
+              <Link
+                to="/signup"
+                className="text-private dark:text-private font-medium hover:underline"
+              >
+                Register Now
+              </Link>
+            </p>
           </div>
-          </div>
-          </div>
-         
         </section>
 
-        {/* Side Image/Content on Desktop */}
-        <div className="hidden md:flex w-1/2 bg-gray-100">
-          <SideView />
-        </div>
+    
+        
       </div>
 
-      <ToastContainer />
+    
+      {userId && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-xl w-[90%] max-w-md relative">
+            <button
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              onClick={() => setUserId("")}
+            >
+              ✕
+            </button>
+            <h2 className="text-lg font-medium mb-4">
+              Please verify your email to activate your account
+            </h2>
+            <input
+              type="text"
+              className="w-full border rounded-md px-3 py-2 mb-4 bg-gray-50 dark:bg-neutral-900 border-gray-200 dark:border-neutral-700"
+              placeholder="Enter verification code"
+              value={emailVerificationCode}
+              onChange={(e) => setEmailVerificationCode(e.target.value)}
+            />
+            <button
+              onClick={handleVerify}
+              disabled={loading}
+              className="w-full bg-private hover:bg-emerald-600 text-white font-semibold py-2 rounded-md transition"
+            >
+              {loading ? (
+                <span>
+                  Verifying <i className="fas fa-spinner fa-spin ml-1"></i>
+                </span>
+              ) : (
+                "Verify Email"
+              )}
+            </button>
+          </div>
+        </div>
+      )}
+
+
     </>
   );
 };

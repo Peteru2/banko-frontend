@@ -19,7 +19,7 @@ export default {
         vintage: "#540202",
         grayLight: "#ececec",
         blue: "#0000FF",
-        bg: "#ebebf3",
+        bg: "#f2f2f2",
         tet: "#ff5887",
       },
       fontFamily: {

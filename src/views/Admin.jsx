@@ -158,7 +158,7 @@ export default function Admin() {
           >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-md bg-emerald-500 flex items-center justify-center text-white font-bold">
+                <div className="h-10 w-10 rounded-md bg-private flex items-center justify-center text-white font-bold">
                   B
                 </div>
                 <div className="text-lg font-semibold">Bankoo</div>
