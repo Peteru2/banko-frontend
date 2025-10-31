@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Sidebar from "../component/admin/sidebar";
+import Loader from "../component/admin/Loader";
+import { useAuth } from "../auth/AuthContext";
+import api from "../services/api";
+import Swal from "sweetalert2";
 import {
-  LayoutDashboard,
-  Users,
-  CreditCard,
-  Shield,
-  Settings,
   Menu,
-  X
 } from "lucide-react";
 import {
   LineChart,
@@ -17,8 +16,10 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+import Table from "../component/admin/Table";
 
 export default function Admin() {
+  const {userData}= useAuth()
   const token = "REPLACE_WITH_TOKEN_FROM_AUTH_CONTEXT";
 
   const [users, setUsers] = useState([]);
@@ -33,51 +34,23 @@ export default function Admin() {
   const [chartData, setChartData] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Mock data loaders
+
+  const fetchUsers = async () => {
+    try {
+      setLoading(true);
+     const res = await api.get("/admin/users")
+      if (res.data?.success) setUsers(res.data.users );
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     async function load() {
       setLoading(true);
       try {
-        const usersJson = [
-          {
-            _id: "u1",
-            name: "Marcei Dogar",
-            email: "marcei@example.com",
-            phone: "76357068",
-            createdAt: "2021-05-01",
-            kyc: "Verified",
-            status: "Active"
-          },
-          {
-            _id: "u2",
-            name: "Fareni Theen",
-            email: "fareni@example.com",
-            phone: "81134356",
-            createdAt: "2021-04-01",
-            kyc: "Pending",
-            status: "Suspended"
-          },
-          {
-            _id: "u3",
-            name: "Nestthi Uriward",
-            email: "nestthi@noan.com",
-            phone: "88671081",
-            createdAt: "2021-12-01",
-            kyc: "Verified",
-            status: "Active"
-          },
-          {
-            _id: "u4",
-            name: "Barba Sawaha",
-            email: "barba@example.com",
-            phone: "89334344",
-            createdAt: "2021-06-01",
-            kyc: "Verified",
-            status: "Active"
-          }
-        ];
-
-        setUsers(usersJson);
+        fetchUsers()
         const statsJson = {
           totalUsers: 3256,
           newToday: 48,
@@ -108,30 +81,61 @@ export default function Admin() {
   }, [token]);
 
   // Delete user handler
-  const handleDelete = async (id) => {
-    const ok = window.confirm(
-      "Are you sure you want to delete this user? This action cannot be undone."
-    );
-    if (!ok) return;
+  const handleDelete = async (userId, email) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: `You’re about to delete ${email}. This action cannot be undone.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+      background: "#1f1f1f",
+      color: "#f5f5f5",
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
-      setUsers((prev) => prev.filter((u) => u._id !== id));
-      setStats((s) => ({ ...s, totalUsers: s.totalUsers - 1 }));
-    } catch (err) {
-      alert("Failed to delete user");
+      const res = await api.delete(`/admin/users/${userId}`);
+      const data  = res.data
+      if (res.ok) {
+        Swal.fire({
+          title: "Deleted!",
+          text: data.message || "User has been deleted.",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+          background: "#1f1f1f",
+          color: "#f5f5f5",
+        });
+        fetchUsers(); 
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: data.message || "Something went wrong while deleting.",
+          icon: "error",
+          confirmButtonColor: "#3085d6",
+          background: "#1f1f1f",
+          color: "#f5f5f5",
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      Swal.fire({
+        title: "Network Error",
+        text: "Could not connect to the server. Please try again later.",
+        icon: "error",
+        background: "#1f1f1f",
+        color: "#f5f5f5",
+      });
     }
-  };
+  }
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-neutral-900">
-        <div className="text-center p-6 rounded-lg shadow bg-white dark:bg-neutral-800">
-          <div className="animate-pulse h-4 w-48 bg-gray-200 dark:bg-neutral-700 mb-4 rounded"></div>
-          <div className="text-sm text-gray-500 dark:text-neutral-300">
-            Loading admin data...
-          </div>
-        </div>
-      </div>
+      <Loader />
     );
   }
 
@@ -144,61 +148,11 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-bg dark:bg-neutral-900 text-gray-900 dark:text-gray-100">
+    <div className="min-h-screen bg-bg dark:bg-neutral-900 lg:ml-64 text-gray-900 dark:text-gray-100">
       <div className="max-w-[1400px] mx-auto p-4 sm:p-6">
         <div className="flex flex-col lg:flex-row gap-6 relative">
           {/* Sidebar */}
-          <aside
-            className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-64 bg-white dark:bg-neutral-800 shadow-lg lg:shadow-sm p-6 flex flex-col gap-6 z-40 transform transition-transform duration-300 ${
-              sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-            }`}
-          >
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-md bg-private flex items-center justify-center text-white font-bold">
-                  B
-                </div>
-                <div className="text-lg font-semibold">Bankoo</div>
-              </div>
-
-           
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="lg:hidden text-gray-500 dark:text-gray-300"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <nav className="flex-1">
-              <ul className="flex flex-col gap-1">
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-neutral-700 text-emerald-700 dark:text-emerald-300 font-medium">
-                  <LayoutDashboard size={18} />
-                  Dashboard
-                </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <Users size={18} />
-                  Users
-                </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <CreditCard size={18} />
-                  Transactions
-                </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <Shield size={18} />
-                  KYC
-                </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
-                  <Settings size={18} />
-                  Settings
-                </li>
-              </ul>
-            </nav>
-
-            <div className="text-sm text-gray-500 dark:text-neutral-400">
-              Admin • bankoo@example.com
-            </div>
-          </aside>
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {/* Overlay for mobile */}
           {sidebarOpen && (
@@ -227,7 +181,16 @@ export default function Admin() {
                 <button className="px-4 py-2 rounded-md border border-gray-200 dark:border-neutral-700 text-sm">
                   Export
                 </button>
-                <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-700"></div>
+                 {userData?.profileImage? (<img
+                              src={userData?.profileImage}
+                              alt="profileImage"
+                              className=" text-black  h-10 w-10  rounded-full"
+                            />):(
+                
+                            <div className="h-10 w-10 rounded-full bg-gray-200 dark:bg-neutral-700"></div>
+                
+                            )}
+               
               </div>
             </div>
 
@@ -274,102 +237,7 @@ export default function Admin() {
             </div>
 
             {/* Users Table */}
-            <div className="bg-white dark:bg-neutral-800 rounded-xl p-0 shadow-sm overflow-hidden">
-              <div className="p-4 border-b border-gray-100 dark:border-neutral-700">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <h3 className="text-lg font-medium">Users</h3>
-                  <div className="flex items-center gap-2">
-                    <input
-                      className="px-3 py-2 rounded-md border border-gray-200 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-900 text-sm"
-                      placeholder="Search users"
-                    />
-                    <button className="px-3 py-2 rounded-md bg-emerald-500 text-white text-sm">
-                      New
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="overflow-x-auto">
-                <table className="min-w-[800px] w-full">
-                  <thead className="bg-gray-50 dark:bg-neutral-900">
-                    <tr>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        Name
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        Email
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        Phone
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        Date Joined
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        KYC
-                      </th>
-                      <th className="px-6 py-4 text-left text-sm font-medium">
-                        Status
-                      </th>
-                      <th className="px-6 py-4 text-right text-sm font-medium">
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((u) => (
-                      <tr
-                        key={u._id}
-                        className="border-t border-gray-100 dark:border-neutral-700 hover:bg-gray-50 dark:hover:bg-neutral-900"
-                      >
-                        <td className="px-6 py-4">{u.name}</td>
-                        <td className="px-6 py-4">{u.email}</td>
-                        <td className="px-6 py-4">{u.phone}</td>
-                        <td className="px-6 py-4">
-                          {new Date(u.createdAt).toLocaleDateString()}
-                        </td>
-                        <td className="px-6 py-4">
-                          <span
-                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                              u.kyc === "Verified"
-                                ? "bg-emerald-100 text-emerald-700"
-                                : "bg-amber-100 text-amber-700"
-                            }`}
-                          >
-                            {u.kyc}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4">
-                          <span
-                            className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                              u.status === "Active"
-                                ? "bg-emerald-100 text-emerald-700"
-                                : "bg-rose-100 text-rose-700"
-                            }`}
-                          >
-                            {u.status}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <div className="flex items-center justify-end gap-2">
-                            <button className="text-sm px-3 py-2 rounded-md border border-gray-200 dark:border-neutral-700">
-                              View
-                            </button>
-                            <button
-                              onClick={() => handleDelete(u._id)}
-                              className="text-sm px-3 py-2 rounded-md bg-rose-500 text-white"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <Table users={users} handleDelete={handleDelete}/>
           </main>
         </div>
       </div>

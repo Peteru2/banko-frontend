@@ -13,7 +13,7 @@ import Layout from './Layout';
 const Dashboard = () => {
   const { userData, loading } = useAuth()
   if (loading) return (
-    <div className="h-screen flex justify-center items-center w-full text-center bg-grayLight">
+    <div className="h-screen flex justify-center items-center w-full text-center bg-grayLight dark:bg-darkGray">
       <div className="flex flex-col items-center justify-center">
 
         <img

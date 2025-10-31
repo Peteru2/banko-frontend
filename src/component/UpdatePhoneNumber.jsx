@@ -1,11 +1,12 @@
 import api from "../services/api.jsx";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { useAuth } from "../auth/AuthContext.jsx";
 
 const UpdatePhoneNumber = ({setShowUpdatePhoneNumber}) => {
   const [updatePhoneNumber, setUpdatePhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
-
+// const {fetchData} = useAuth()
   const phoneRegex = /^\d{11}$/;
 
   const handleUpdatePhoneNumber = async (e) => {
@@ -51,6 +52,7 @@ const UpdatePhoneNumber = ({setShowUpdatePhoneNumber}) => {
         timer: 2000,
         timerProgressBar: true,
       });
+      // fetchData()
       if(response.status= 200){
       setShowUpdatePhoneNumber(false)
       }

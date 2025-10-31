@@ -1,10 +1,15 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
+import Loader from './admin/Loader'
 const ProtectedRoutes = ({children, requiredRole}) => {
     
-    const { userData } = useAuth()
+    const { userData, loading } = useAuth()
+    if (loading) {
+    return <Loader /> 
+  }
     if(!userData){
+      console.log(userData + "user data is not ready")
         return <Navigate to="/login" />;
     }
 

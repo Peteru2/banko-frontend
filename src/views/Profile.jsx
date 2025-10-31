@@ -6,7 +6,7 @@ import api from "../services/api";
 import ProfileImage from "../component/ProfileImage";
 import ThemeToggle from "../component/ThemeToggle";
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 const Profile = () => {
   const { logout, userData, fetchData } = useAuth();
   const [copied, setCopied] = useState(false);
@@ -67,6 +67,15 @@ const Profile = () => {
           </button>
 
           <ThemeToggle />
+          <div className="text-black mt-2 dark:text-white">
+          {userData.role === "admin"?(<>
+            <Link to={"/admin"}>Admin</Link>
+            <p>{userData.role}</p>
+            
+            </>
+          ):
+          (null)}
+          </div>
         </div>
       </div>
     </motion.div>

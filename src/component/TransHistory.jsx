@@ -41,7 +41,7 @@ const TransHistory = () => {
         <Header header="Transaction history" />
 
         {!hasTransactions ? (
-          <div className="bg-white mx-[20px] py-4 rounded-[10px] text-center">
+          <div className="bg-white dark:bg-darkGray text-blaxk dark:text-white mx-[20px] py-4 rounded-[10px] text-center">
             <h2 className="font-bold text-sm">No transaction history found</h2>
           </div>
         ) : (

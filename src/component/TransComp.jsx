@@ -3,8 +3,8 @@ import React from 'react'
 export const TransComp = ({ trans, userData, option }) => {
   if (!trans || trans.length === 0) {
     return (
-      <div className="bg-white py-4 rounded-[10px]">
-        <h2 className="font-bold text-sm text-center">
+      <div className="bg-white py-4 rounded-[10px] dark:bg-darkGray">
+        <h2 className="font-bold text-sm text-black dark:text-white  text-center">
           No transaction history found
         </h2>
       </div>
