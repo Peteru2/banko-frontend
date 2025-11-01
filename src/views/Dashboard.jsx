@@ -21,7 +21,7 @@ const Dashboard = () => {
           alt="loading.."
           className="w-[60px] md:w-[80px] border border-private rounded-full mb-3 animate-pulseGrow"
         />
-        <h2 className="text-public text-[14px] font-bold font-lora">
+        <h2 className="text-public dark:text-white text-[14px] font-bold font-lora">
           Bank With Ease.
         </h2>
       </div>

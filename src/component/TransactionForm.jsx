@@ -22,7 +22,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         recipientAccountNumber,
         amount,
       });
-
+      
       if (response.data.message === "success") {
         setRecipientData(response.data.user);
         console.log(response.data.user)
@@ -81,12 +81,12 @@ const TransactionForm = ({ handleShowTransferForm }) => {
 
   return (
     <div className="w-full flex mt-[50px] justify-center font-roboto">
-      <div className="bg-white shadow-md rounded-[12px] p-8 w-[400px]">
+      <div className="bg-white dark:bg-darkGray shadow-md rounded-[12px] p-8 w-[400px]">
         <h2 className="text-center font-bold text-private">Transfer Funds</h2>
 
         <form onSubmit={handleSubmitValidation}>
           <div className="my-4">
-            <label htmlFor="recipientId" className="text-sm text-black text-opacity-50">
+            <label htmlFor="recipientId" className="text-sm text-black dark:text-white text-opacity-50">
               Recipient Account:
             </label>
             <input
@@ -95,13 +95,13 @@ const TransactionForm = ({ handleShowTransferForm }) => {
               value={recipientAccountNumber}
               onChange={(e) => setRecipientAcctNumber(e.target.value)}
               required
-              className="border-[1px] w-full text-sm rounded-[8px] p-2 outline-none border-gray"
+              className="border-[1px] w-full dark:text-white text-sm dark:bg-neutral-900 text-sm rounded-[8px] p-2 outline-none border-gray"
               placeholder="Account Number"
             />
           </div>
 
           <div>
-            <label htmlFor="amount" className="text-sm text-black text-opacity-50">
+            <label htmlFor="amount" className="text-sm dark:text-white  text-black text-opacity-50">
               Amount:
             </label>
             <input
@@ -110,7 +110,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               required
-              className="border-[1px] w-full text-sm rounded-[8px] p-2 outline-none border-gray"
+              className="border-[1px] w-full dark:text-white text-sm dark:bg-neutral-900 rounded-[8px] p-2 outline-none border-gray"
               placeholder="Minimum of ₦50"
             />
           </div>

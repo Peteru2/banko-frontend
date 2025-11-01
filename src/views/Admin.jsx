@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../component/admin/sidebar";
+import Sidebar from "../component/admin/Sidebar";
 import Loader from "../component/admin/Loader";
 import { useAuth } from "../auth/AuthContext";
+import {useTheme} from "../context/ThemeContext"
 import api from "../services/api";
 import Swal from "sweetalert2";
 import {
   Menu,
-} from "lucide-react";
+} from "lucide-react"   
 import {
   LineChart,
   Line,
@@ -17,9 +18,11 @@ import {
   ResponsiveContainer
 } from "recharts";
 import Table from "../component/admin/Table";
+import themedSwal from "../utils/themedSwal"
 
 export default function Admin() {
   const {userData}= useAuth()
+  const {theme} = useTheme()
   const token = "REPLACE_WITH_TOKEN_FROM_AUTH_CONTEXT";
 
   const [users, setUsers] = useState([]);
@@ -82,25 +85,39 @@ export default function Admin() {
 
   // Delete user handler
   const handleDelete = async (userId, email) => {
-    const result = await Swal.fire({
+   
+    const result = await  themedSwal({
       title: "Are you sure?",
-      text: `You’re about to delete ${email}. This action cannot be undone.`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "Cancel",
-      background: "#1f1f1f",
-      color: "#f5f5f5",
-    });
+          text: `You’re about to delete ${email}. This action cannot be undone.`,
+          icon: "warning",
+          confirmButtonText: "Yes, delete it!",
+          cancelButtonText: "Cancel",
+          showCancelButton: true,
+    }, theme);
+    
+    
+    
+    
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   text: `You’re about to delete ${email}. This action cannot be undone.`,
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#d33",
+    //   cancelButtonColor: "#3085d6",
+    //   confirmButtonText: "Yes, delete it!",
+    //   cancelButtonText: "Cancel",
+    //   background: "#1f1f1f",
+    //   color: "#f5f5f5",
+    // });
 
     if (!result.isConfirmed) return;
 
     try {
       const res = await api.delete(`/admin/users/${userId}`);
       const data  = res.data
-      if (res.ok) {
+      if (data.success) {
+      
         Swal.fire({
           title: "Deleted!",
           text: data.message || "User has been deleted.",

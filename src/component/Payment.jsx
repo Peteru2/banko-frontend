@@ -74,13 +74,13 @@ const Payment = () => {
                 </div>
               </div>
               <div
-                className={`genModal font-roboto ${showTransferForm ? "modal-show w-full" : ""}`}
+                className={`genModal font-roboto ${showTransferForm ? "border border-white modal-show w-full" : ""}`}
               >
                 <h2
                   onClick={handleShowTransferForm}
                   className="absolute top-4 cursor-pointer"
                 >
-                  <i className="fa fa-arrow-left  text-black text-opacity-70 "> </i>
+                  <i className="fa fa-arrow-left dark:text-white text-black text-opacity-70 "> </i>
                 </h2>
                 <TransactionForm handleShowTransferForm = {()=>setShowTransferForm((trans) => !trans)}/>
               </div>
