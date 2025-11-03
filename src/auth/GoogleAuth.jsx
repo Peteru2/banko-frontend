@@ -14,7 +14,7 @@ const GoogleAuth = () => {
     });
 
       login(res.data)
-      console.log(res.data);
+      
   };
 
 

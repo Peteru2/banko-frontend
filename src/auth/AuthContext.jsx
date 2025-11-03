@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import api from "../services/api";
 import getUserDashboardData from "../services/userServices";
-
+import themedSwal from "../utils/themedSwal"
+import {useTheme} from "../context/ThemeContext"
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -12,6 +13,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const { theme  } = useTheme()
 
   useEffect(() => {
     if (token === null) {
@@ -45,50 +47,52 @@ export const AuthContextProvider = ({ children }) => {
     if (data.user) {
       setUserData(data.user);
     }
-    Swal.fire({
+    themedSwal({
       icon: "success",
       title: "Welcome!",
-      text: `Hello, ${data?.user?.fullname || "User"}`,
+      text: `Hello, ${data?.user?.lastname || "User"}`,
       showConfirmButton: false,
-      timer: 2000,
+      timer: 1500,
       timerProgressBar: true,
-    });
+    }, theme)
 
     navigate("/");
   } catch (err) {
     console.error("Login failed:", err);
-    Swal.fire({
+    themedSwal({
       icon: "error",
       title: "Oops!",
       text: "Login failed. Please try again.",
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
-    });
+    },theme)
   }
 };
   const logout = async () => {
   try {
     const res = await api.post("/logout"); 
-    Swal.fire({
-                 icon: "success",
+    themedSwal({
+       icon: "success",
                  title: "Success!",
                  text: res?.data?.message || "User Loggod out successfully",
                  showConfirmButton: false,  
                  timer: 2000,               
                  timerProgressBar: true,
-               });
-               console.log(res?.data?.message)
+    }, theme)
+    
+              
   } catch (err) {
     console.error("Logout failed", err);
-    Swal.fire({
-                 icon: "error",
+    theme({
+       icon: "error",
                  title: "opps!",
                  text: err?.response?.data?.message,
                  showConfirmButton: false,  
                  timer: 2000,               
                  timerProgressBar: true,
-               });
+    }, theme)
+    
   } finally {
     localStorage.removeItem("token");
     navigate("/login");

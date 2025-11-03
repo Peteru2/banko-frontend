@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import api from "../services/api.jsx";
 import Swal from "sweetalert2";
 import { useAuth } from "../auth/AuthContext.jsx";
-
+import { useTheme } from "../context/ThemeContext.jsx"
+import themedSwal from "../utils/themedSwal"
 
 const TransactionForm = ({ handleShowTransferForm }) => {
   const { fetchData } = useAuth(); 
+  const { theme } = useTheme()
   const [recipientAccountNumber, setRecipientAcctNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [transPin, setTransPin] = useState("");
@@ -25,16 +27,16 @@ const TransactionForm = ({ handleShowTransferForm }) => {
       
       if (response.data.message === "success") {
         setRecipientData(response.data.user);
-        console.log(response.data.user)
         setShowConfirmModal(true);
       }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
+      themedSwal({
+      icon: "error",
         title: "Oops...",
         text: error.response?.data?.error || "Something went wrong!",
         
-      });
+    }, theme);
+     
     } finally {
       setValidating(false);
     }
@@ -50,15 +52,15 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         transPin,
       });
 
-      Swal.fire({
+      themedSwal({
         icon: "success",
         title: "Success!",
         text: response.data.message,
         showConfirmButton: false,  
   timer: 2000,               
   timerProgressBar: true,
-      });
-
+      }, theme);
+      
       if (response.data.message === "Funds transferred successfully") {
         await fetchData();
         setShowConfirmModal(false);
@@ -68,12 +70,13 @@ const TransactionForm = ({ handleShowTransferForm }) => {
         handleShowTransferForm();
       }
     } catch (error) {
-      Swal.fire({
+       themedSwal({
         icon: "error",
         title: "Oops...",
         text: error.response?.data?.error || "Transaction failed.",
         
-      });
+      }, theme);
+      
     } finally {
       setLoading(false);
     }
@@ -111,7 +114,7 @@ const TransactionForm = ({ handleShowTransferForm }) => {
               onChange={(e) => setAmount(e.target.value)}
               required
               className="border-[1px] w-full dark:text-white text-sm dark:bg-neutral-900 rounded-[8px] p-2 outline-none border-gray"
-              placeholder="Minimum of ₦50"
+              placeholder="Minimum of ₦50"                                                                                                                                                                                                                                   
             />
           </div>
 

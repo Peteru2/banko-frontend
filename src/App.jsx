@@ -12,11 +12,13 @@
     return (
       <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
         <Router>
+           <ThemeProvider>
           <AuthContextProvider>
-            <ThemeProvider>
+           
              <AnimatedRoutes />
-            </ThemeProvider>
           </AuthContextProvider>
+            </ThemeProvider>
+
         </Router>
       </GoogleOAuthProvider>
     );

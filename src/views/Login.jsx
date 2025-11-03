@@ -8,9 +8,12 @@ import api from "../services/api";
 import { useAuth } from "../auth/AuthContext";
 import Swal from "sweetalert2";
 import GoogleAuth from "../auth/GoogleAuth";
-
+import {useTheme} from "../context/ThemeContext"
+import themedSwal from "../utils/themedSwal"
 const Login = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme()
+
   const [icon, setIcon] = useState(false);
   const [userId, setUserId] = useState("");
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
@@ -50,14 +53,15 @@ const Login = () => {
         .then((response) => {
           const { token } = response.data;
           localStorage.setItem("token", token);
-          Swal.fire({
+          themedSwal({
             icon: "success",
             title: "Welcome Back!",
             text: response.data.message,
             showConfirmButton: false,
-            timer: 2000,
+              timer: 2000,
             timerProgressBar: true,
-          });
+          }, theme)
+         
           navigate("/");
           setUserData(response.data.user);
           setFormData({ email: "", password: "" });
@@ -68,14 +72,14 @@ const Login = () => {
             error.response?.data?.error ||
             error.response?.data?.message ||
             "Login failed";
-          Swal.fire({
-            icon: "error",
+            themedSwal({
+              icon: "error",
             title: "Oops...",
             text: errMsg,
             showConfirmButton: false,
             timer: 2000,
             timerProgressBar: true,
-          });
+            }, theme)
           setIcon(false);
         });
     }
@@ -91,18 +95,20 @@ const Login = () => {
       });
       setUserId("");
       setEmailVerificationCode("");
-      Swal.fire({
+      themedSwal({
         icon: "success",
         title: "Success!",
         text: response.data.message,
-      });
+      })
+     
       navigate("/login");
     } catch (error) {
-      Swal.fire({
-        icon: "error",
+      themedSwal({
+         icon: "error",
         title: "Oops...",
         text: error.response?.data?.error,
-      });
+      })
+      
       setLoading(false);
     }
   };

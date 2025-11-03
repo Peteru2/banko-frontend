@@ -86,14 +86,14 @@ export default function Admin() {
   // Delete user handler
   const handleDelete = async (userId, email) => {
    
-    const result = await  themedSwal({
-      title: "Are you sure?",
-          text: `You’re about to delete ${email}. This action cannot be undone.`,
-          icon: "warning",
-          confirmButtonText: "Yes, delete it!",
-          cancelButtonText: "Cancel",
-          showCancelButton: true,
-    }, theme);
+      const result = await  themedSwal({
+            title: "Are you sure?",
+            text: `You’re about to delete ${email}. This action cannot be undone.`,
+            icon: "warning",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "Cancel",
+            showCancelButton: true,
+      }, theme);
     
     
     
