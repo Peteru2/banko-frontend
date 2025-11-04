@@ -29,14 +29,17 @@ const Navbar = () => {
               className=" text-black  w-[22px] h-[22px]  rounded-full"
             />):(
 
-            <i className="fa fa-user text-black text-opacity-70 rounded-full"></i>
+            <i className="fa fa-user text-black dark:text-white text-opacity-70 rounded-full"></i>
 
             )}
             
           </div>
           </Link>
           <div>
-            <p className="text-black text-[16px] font-bold dark:text-white  text-opacity-70"> ₦{userData?.balance?.toLocaleString()}</p>
+            <p className="text-black text-[16px] font-bold dark:text-white  text-opacity-70"> ₦{userData?.balance?.toLocaleString("en-NG",{
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}</p>
           </div>
           <Link to ={'/notification'}>
           <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>

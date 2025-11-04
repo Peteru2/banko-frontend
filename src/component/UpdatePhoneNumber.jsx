@@ -2,10 +2,13 @@ import api from "../services/api.jsx";
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { useAuth } from "../auth/AuthContext.jsx";
+import { useTheme } from "../context/ThemeContext"
+import themedSwal from "../utils/themedSwal"
 
 const UpdatePhoneNumber = ({setShowUpdatePhoneNumber}) => {
   const [updatePhoneNumber, setUpdatePhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
+  const {theme} = useTheme()
 const {fetchData} = useAuth()
   const phoneRegex = /^\d{11}$/;
 
@@ -15,56 +18,58 @@ const {fetchData} = useAuth()
     setLoading(true);
 
     if (!updatePhoneNumber.trim()) {
-      Swal.fire({
-        icon: "error",
+themedSwal({
+  icon: "error",
         title: "Oops...",
         text: "Phone number cannot be empty",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
-      });
+}, theme)
+      
       setLoading(false);
       return; 
     }
 
     if (!phoneRegex.test(updatePhoneNumber) || updatePhoneNumber.length !== 11) {
-      Swal.fire({
-        icon: "error",
+      themedSwal({
+icon: "error",
         title: "Oops...",
         text: "Invalid Phone Number",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
-      });
+      }, theme)
+      
       setLoading(false);
       return; 
     }
 
     try {
       const response = await api.put("/updatePhoneNumber", { updatePhoneNumber });
-      console.log(response.data);
-
-      Swal.fire({
-        icon: "success",
+        themedSwal({
+          icon: "success",
         title: "Success!",
         text: "Phone number updated successfully",
         showConfirmButton: false,
         timer: 2000,
         timerProgressBar: true,
-      });
+        },theme)
+      
       if(response.status= 200){
       setShowUpdatePhoneNumber(false)
       fetchData()
       }
     } catch (error) {
-      console.error(error);
-      Swal.fire({
-        icon: "error",
+  
+      themedSwal({
+          icon: "error",
         title: "Oops...",
         text: error.response?.data?.error,
         showConfirmButton: false,
         timer: 2000,
-      });
+      }, theme)
+      
     } finally {
       setLoading(false);
     }
@@ -80,7 +85,7 @@ const {fetchData} = useAuth()
             value={updatePhoneNumber}
             onChange={(e) => setUpdatePhoneNumber(e.target.value)}
             required
-            className="border-[1px] w-full text-sm rounded-[8px] p-2 outline-none border-gray"
+            className="border-[1px] w-full dark:text-white  text-sm rounded-[8px] dark:bg-neutral-900 p-2 outline-none border-gray"
             placeholder="Phone Number"
           />
         </div>

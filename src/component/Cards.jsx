@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Cards = () => {
+    const Cards = () => {
   return (
     <div className=" w-full justify-center  flex items-center font-roboto ">
       <div className=" w-full max-w-[560px]  rounded-md rounded-b-[0px] mb-[35px] mt-[25px]  mx-[20px] items-center">

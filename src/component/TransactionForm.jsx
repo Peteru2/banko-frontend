@@ -34,7 +34,6 @@ const TransactionForm = ({ handleShowTransferForm }) => {
       icon: "error",
         title: "Oops...",
         text: error.response?.data?.error || "Something went wrong!",
-        
     }, theme);
      
     } finally {
@@ -137,9 +136,9 @@ const TransactionForm = ({ handleShowTransferForm }) => {
       {/* Confirmation Modal */}
       {showConfirmModal && recipientData && (
         <div className="modal modal-show font-roboto w-[350px]">
-          <div className="bg-white p-4 shadow-lg rounded-[8px]">
+          <div className="bg-white dark:bg-neutral-900 p-4 shadow-lg rounded-[8px]">
             <div className="flex w-full">
-              <h2 className="mb-2 text-sm text-black text-opacity-30">
+              <h2 className="mb-2 text-sm text-black dark:text-white dark:text-opacity-70 text-opacity-30">
                 Recipient Name:{" "}
                 <span className="text-private font-bold uppercase">
                   {recipientData.firstname + " " + recipientData.lastname}
@@ -147,21 +146,21 @@ const TransactionForm = ({ handleShowTransferForm }) => {
               </h2>
               <span
                 onClick={() => setShowConfirmModal(false)}
-                className="ml-auto text-sm cursor-pointer"
+                className="ml-auto text-sm text-black dark:text-white  cursor-pointer"
               >
                 <i className="fa fa-times"></i>
               </span>
             </div>
 
             <div>
-              <label className="text-sm text-black text-opacity-50 text-center">
+              <label className="text-sm text-black dark:text-white dark:text-opacity-40 text-opacity-50 text-center">
                 Transaction Pin
               </label>
               <input
                 type="number"
                 value={transPin}
                 onChange={(e) => setTransPin(e.target.value)}
-                className="border-[1px] w-full text-sm mt-1 rounded-[8px] p-2 outline-none border-gray"
+                className="border-[1px] w-full text-sm mt-1 dark:text-white   rounded-[8px] p-2 dark:bg-neutral-900 outline-none border-gray"
                 placeholder="Your pin"
               />
             </div>

@@ -5,9 +5,13 @@ import Logo from "../assets/image/Logo.png";
 import api from "../services/api";
 import Swal from "sweetalert2";
 import GoogleAuth from "../auth/GoogleAuth";
+import {useTheme} from "../context/ThemeContext"
+import themedSwal from "../utils/themedSwal"
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const {theme} = useTheme()
+
   const [icon, setIcon] = useState(false);
   const [userId, setUserId] = useState("");
   const [emailVerificationCode, setEmailVerificationCode] = useState("");
@@ -72,21 +76,21 @@ const SignUp = () => {
           phoneNumber: "",
           password: "",
         });
-
-        Swal.fire({
+        themedSwal({
           icon: "success",
-          title: "Account Created 🎉",
-          text: "Please verify your email to continue.",
-          showConfirmButton: false,
-          timer: 2000,
-          timerProgressBar: true,
-        });
+                  title: "Account Created 🎉",
+                  // text: "Please verify your email to continue.",
+                  showConfirmButton: false,
+                  timer: 2000,
+                  timerProgressBar: true,
+        }, theme)
+               
 
         setUserId(response.data?.user?._id);
         setIcon(false);
       })
       .catch((error) => {
-        Swal.fire({
+        themedSwal({
           icon: "error",
           title: "Oops...",
           text:
@@ -96,7 +100,8 @@ const SignUp = () => {
           showConfirmButton: false,
           timer: 2000,
           timerProgressBar: true,
-        });
+        }, theme)
+        
         setIcon(false);
       });
   };
@@ -109,7 +114,6 @@ const SignUp = () => {
         userId,
         emailVerificationCode,
       });
-
       Swal.fire({
         icon: "success",
         title: "Email Verified!",
@@ -242,7 +246,7 @@ const SignUp = () => {
       </div>
 
       {/* Email Verification Modal */}
-      {userId && (
+      {/* {userId && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white dark:bg-neutral-800 p-6 rounded-lg shadow-xl w-[90%] max-w-md relative">
             <button
@@ -276,7 +280,7 @@ const SignUp = () => {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

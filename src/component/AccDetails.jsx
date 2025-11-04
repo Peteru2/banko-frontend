@@ -9,9 +9,12 @@ import { Link } from "react-router-dom";
 import api from "../services/api"
 import UpdatePhoneNumber from './UpdatePhoneNumber.jsx'
 import ThemeToggle from "./ThemeToggle.jsx";
+import {useTheme} from "../context/ThemeContext"
+import themedSwal from "../utils/themedSwal"
 
 const AccDetails = () => {
   const { userData, fetchData } = useAuth();
+  const {theme} = useTheme()
 
   const [bvn, setBvn] = useState(false);
   const [showPinInput, setShowPinInput] = useState(false);
@@ -34,28 +37,30 @@ const AccDetails = () => {
   const handleSubmitTransactionPin = async (pin) => {
     try {
       const response = await api.put("/updateTransactionPin", { pin });
+      themedSwal({
 
-       Swal.fire({
         icon: "success",
         title: "Success!",
         text: "Transaction Pin updated successfully.",
         showConfirmButton: false,  
   timer: 2000,               
   timerProgressBar: true,
-      });
+      }, theme)
+       
 
 
       setShowPinInput(false);
       await fetchData(); 
     } catch (error) {
-      Swal.fire({
-        icon: "error",
+      theme({
+          icon: "error",
         title: "Oops...",
         text: "Failed to update transaction pin",
         showConfirmButton: false,  
   timer: 2000,               
   timerProgressBar: true,
-      });
+      }, theme)
+      
       console.error("Failed to update transaction pin:", error);
     }
   };
@@ -101,8 +106,8 @@ const AccDetails = () => {
        
         {showPinInput && (
           <form className="modal w-[300px] font-roboto modal-show">
-            <div className="bg-white p-4 rounded-[6px]">
-              <h2 className="text-19px text-center">Set Your Transaction Pin</h2>
+            <div className="bg-white dark:bg-neutral-800 dark:text-white p-4 rounded-[6px]">
+              <h2 className="text-19px dark:text-white text-center">Set Your Transaction Pin</h2>
               <TransPinForm onSubmit={handleSubmitTransactionPin} />
             </div>
           </form>
@@ -110,8 +115,8 @@ const AccDetails = () => {
 
       {showUpdatePhoneNumber && (
             <div className="modal w-[300px] font-roboto modal-show">
-            <div className="bg-white p-4 rounded-[6px]">
-              <h2 className="text-19px text-center">Input your Phone Number</h2>
+            <div className="bg-white dark:bg-neutral-800 p-4 rounded-[6px]">
+              <h2 className="text-19px dark:text-opacity-70 dark:text-white text-center">Input your Phone Number</h2>
               <UpdatePhoneNumber setShowUpdatePhoneNumber= {setShowUpdatePhoneNumber} />
             </div>
           </div>

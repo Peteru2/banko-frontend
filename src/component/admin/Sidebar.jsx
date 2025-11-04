@@ -35,23 +35,23 @@ const Sidebar = ({sidebarOpen, setSidebarOpen}) =>{
 
             <nav className="flex-1">
               <ul className="flex flex-col gap-1">
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg bg-emerald-50 dark:bg-neutral-700 text-emerald-700 dark:text-emerald-300 font-medium">
+                <li className="flex items-center gap-3 px-3 cursor-pointer py-2 rounded-lg bg-emerald-50 dark:bg-neutral-700 text-emerald-700 dark:text-emerald-300 font-medium">
                   <LayoutDashboard size={18} />
                   Dashboard
                 </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                <li className="flex items-center gap-3 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
                   <Users size={18} />
                   Users
                 </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                <li className="flex items-center gap-3 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
                   <CreditCard size={18} />
                   Transactions
                 </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                <li className="flex items-center gap-3 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
                   <Shield size={18} />
                   KYC
                 </li>
-                <li className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
+                <li className="flex items-center gap-3 cursor-pointer px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700">
                   <Settings size={18} />
                   Settings
                 </li>

@@ -5,6 +5,7 @@ import { useAuth } from "../auth/AuthContext";
 import {useTheme} from "../context/ThemeContext"
 import api from "../services/api";
 import Swal from "sweetalert2";
+import Modal from "../component/Modal"
 import {
   Menu,
 } from "lucide-react"   
@@ -24,7 +25,6 @@ export default function Admin() {
   const {userData}= useAuth()
   const {theme} = useTheme()
   const token = "REPLACE_WITH_TOKEN_FROM_AUTH_CONTEXT";
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -36,52 +36,50 @@ export default function Admin() {
   });
   const [chartData, setChartData] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
 
-
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-     const res = await api.get("/admin/users")
-      if (res.data?.success) setUsers(res.data.users );
-    } catch (err) {
-      console.error("Error fetching users:", err);
-    } finally {
-      setLoading(false);
-    }
+  const handleView = (user) => {
+    setSelectedUser(user);
   };
-  useEffect(() => {
-    async function load() {
-      setLoading(true);
-      try {
-        fetchUsers()
-        const statsJson = {
-          totalUsers: 3256,
-          newToday: 48,
-          totalBalances: 1625000,
-          transactionsWeek: 6480000
-        };
-        setStats(statsJson);
 
-        const months = [
-          { month: "Jan", signups: 10 },
-          { month: "Feb", signups: 320 },
-          { month: "Mar", signups: 520 },
-          { month: "Apr", signups: 650 },
-          { month: "May", signups: 800 },
-          { month: "Jun", signups: 980 },
-          { month: "Jul", signups: 1430 }
-        ];
-        setChartData(months);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load admin data");
-      } finally {
-        setLoading(false);
-      }
+const fetchUsers = async () => {
+  try {
+    setLoading(true);
+    const res = await api.get("/admin/users");
+    if (res.data?.success) {
+      const fetchedUsers = res.data.users;
+      setUsers(fetchedUsers);
+
+      // Update stats immediately after data arrives
+      const statsJson = {
+        totalUsers: fetchedUsers.length,
+        newToday: 48,
+        totalBalances: 1625000,
+        transactionsWeek: 6480000,
+      };
+      setStats(statsJson);
     }
+  } catch (err) {
+    console.error("Error fetching users:", err);
+  } finally {
+    setLoading(false);
+  }
+};
 
-    load();
-  }, [token]);
+  useEffect(() => {
+  fetchUsers();
+
+  const months = [
+    { month: "Jan", signups: 10 },
+    { month: "Feb", signups: 320 },
+    { month: "Mar", signups: 520 },
+    { month: "Apr", signups: 650 },
+    { month: "May", signups: 800 },
+    { month: "Jun", signups: 980 },
+    { month: "Jul", signups: 1430 },
+  ];
+  setChartData(months);
+}, [token]);
 
   // Delete user handler
   const handleDelete = async (userId, email) => {
@@ -93,23 +91,7 @@ export default function Admin() {
             confirmButtonText: "Yes, delete it!",
             cancelButtonText: "Cancel",
             showCancelButton: true,
-      }, theme);
-    
-    
-    
-    
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: `You’re about to delete ${email}. This action cannot be undone.`,
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#d33",
-    //   cancelButtonColor: "#3085d6",
-    //   confirmButtonText: "Yes, delete it!",
-    //   cancelButtonText: "Cancel",
-    //   background: "#1f1f1f",
-    //   color: "#f5f5f5",
-    // });
+      }, theme);  
 
     if (!result.isConfirmed) return;
 
@@ -118,35 +100,33 @@ export default function Admin() {
       const data  = res.data
       if (data.success) {
       
-        Swal.fire({
-          title: "Deleted!",
+        themedSwal({
+           title: "Deleted!",
           text: data.message || "User has been deleted.",
           icon: "success",
           timer: 2000,
           showConfirmButton: false,
-          background: "#1f1f1f",
-          color: "#f5f5f5",
-        });
+        }, theme)
+       
         fetchUsers(); 
       } else {
-        Swal.fire({
+        themedSwal({
           title: "Error!",
           text: data.message || "Something went wrong while deleting.",
           icon: "error",
-          confirmButtonColor: "#3085d6",
-          background: "#1f1f1f",
-          color: "#f5f5f5",
-        });
+          showConfirmButton: false,
+          
+        }, theme)
+       
       }
     } catch (error) {
       console.error("Error deleting user:", error);
-      Swal.fire({
-        title: "Network Error",
+      themedSwal({
+ title: "Network Error",
         text: "Could not connect to the server. Please try again later.",
         icon: "error",
-        background: "#1f1f1f",
-        color: "#f5f5f5",
-      });
+      }, theme)
+     
     }
   }
 
@@ -163,6 +143,7 @@ export default function Admin() {
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-bg dark:bg-neutral-900 lg:ml-64 text-gray-900 dark:text-gray-100">
@@ -254,11 +235,66 @@ export default function Admin() {
             </div>
 
             {/* Users Table */}
-            <Table users={users} handleDelete={handleDelete}/>
+            <Table users={users} handleDelete={handleDelete} setUsers={setUsers} handleView={handleView}/>
+
+            <Modal isOpen={!!selectedUser} onClose={() => setSelectedUser(null)}>
+        {selectedUser && (
+          <div className="flex flex-col items-center text-center">
+  {/* Profile Picture */}
+  <div className="w-24 h-24 rounded-full overflow-hidden mb-3 border-2 border-gray-200 dark:border-neutral-700">
+    <img
+      src={
+        selectedUser.profileImage ||
+        "https://ui-avatars.com/api/?name=" +
+          encodeURIComponent(
+            `${selectedUser.firstname || ""} ${selectedUser.lastname || ""}`
+          ) +
+          "&background=random"
+      }
+      alt={`${selectedUser.firstname} ${selectedUser.lastname}`}
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+  {/* Name and Email */}
+  <h2 className="text-xl font-semibold mb-1">
+    {selectedUser.firstname} {selectedUser.lastname}
+  </h2>
+  <p className="text-sm text-gray-500 mb-4">{selectedUser.email}</p>
+
+  {/* User Info */}
+  <div className="space-y-2 text-sm text-left w-full">
+    <p>
+      <strong>Phone:</strong> {selectedUser.phoneNumber || "N/A"}
+    </p>
+    <p>
+      <strong>Balance:</strong> ₦
+      {selectedUser.wallet?.balance?.toLocaleString() || 0}
+    </p>
+    <p>
+      <strong>Status:</strong> {selectedUser.status ? "Active" : "Inactive"}
+
+    </p>
+     <p>
+      <strong>kycLevel:</strong> {selectedUser.kycLevel}
+    </p>
+  </div>
+
+  {/* Optional Close Button */}
+  {/* <button
+    onClick={() => setSelectedUser(null)}
+    className="mt-5 w-full py-2 rounded-md bg-primary text-white"
+  >
+    Close
+  </button> */}
+</div>
+        )}
+      </Modal>
           </main>
         </div>
       </div>
     </div>
+
   );
 }
 
@@ -271,3 +307,5 @@ function StatCard({ label, value }) {
     </div>
   );
 }
+// In Admin.jsx
+
