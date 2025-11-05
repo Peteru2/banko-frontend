@@ -1,91 +1,53 @@
 import React from "react";
-import DashboardActive from "../../assets/image/dashboard-active.svg";
-import DashboardInActive from "../../assets/image/dashboard-inactive.svg";
-import DepositActive from "../../assets/image/deposits-active.svg";
-import DepositInActive from "../../assets/image/deposits-inactive.svg";
-import LoanActive from "../../assets/image/loans-active.svg";
-import LoanInActive from "../../assets/image/loans-inactive.svg";
-import NotificationActive from "../../assets/image/notification-active.svg";
-import NotificationInActive from "../../assets/image/notification-inactive.svg";
-import MoreActive from "../../assets/image/more-active.svg";
-import MoreInActive from "../../assets/image/more-inactive.svg";
-
 import { Link, useLocation } from "react-router-dom";
+
+
+import { Home, Wallet, CreditCard, History, MoreHorizontal } from "lucide-react";
+
 const Footer = ({ userData }) => {
-  const navSideList = [
-    {
-      title: "Dashboard",
-      url: "/",
-      active: DashboardActive,
-      inactive: DashboardInActive,
-    },
-    {
-      title: "Deposits",
-      url: "/dfd",
-      active: DepositActive,
-      inactive: DepositInActive,
-    },
-    {
-      title: "Loans",
-      url: "/dfd",
-      active: LoanActive,
-      inactive: LoanInActive,
-    },
-    {
-      title: "History",
-      url: "/history",
-      active: NotificationActive,
-      inactive: NotificationInActive,
-      userData: userData,
-    },
-    {
-      title: "More",
-      url: "/dfdg",
-      active: MoreActive,
-      inactive: MoreInActive,
-    },
-  ];
   const location = useLocation();
+
+  const navSideList = [
+    { title: "Dashboard", url: "/", icon: Home },
+    { title: "Deposits", url: "/deposits", icon: Wallet },
+    { title: "Loans", url: "/loans", icon: CreditCard },
+    { title: "History", url: "/history", icon: History },
+    { title: "More", url: "/more", icon: MoreHorizontal },
+  ];
 
   return (
     <>
       <div className="justify-center items-center flex mt-[100px]">
-        <aside className="bg-white dark:bg-darkGray fixed  w-full max-w-[600px] bottom-0 rounded-tr-[10px] rounded-tl-[10px]">
-          <div className=" text-black w-full items-center md:px-12 px-[20px] justify-between flex  text-opacity-50 ">
+        <aside className="bg-white dark:bg-darkGray fixed bottom-0 w-full max-w-[600px] rounded-t-[12px] shadow-lg backdrop-blur-md">
+          <div className="text-black w-full items-center md:px-12 px-[20px] justify-between flex py-2">
             {navSideList.map((item, index) => {
               const isActive = location.pathname === item.url;
+              const Icon = item.icon;
+
               return (
-                <div
+                <Link
+                  to={item.url}
                   key={index}
-                  className={` text-sm md:py-4 py-2 flex justify-between ${location.pathname === item.url ? " text-text" : ""} `}
+                  className="flex flex-col items-center justify-center w-full cursor-pointer"
                 >
-                  <Link
-                    to={item.url}
-                    className="text-center items-center justify-center outline-none flex"
+                  <Icon
+                    size={24}
+                    className={`transition-all duration-300 ${
+                      isActive
+                        ? "text-primary dark:text-white scale-110"
+                        : "text-black/60 dark:text-white/50"
+                    }`}
+                  />
+                  <p
+                    className={`text-[11px] mt-[3px] transition-all duration-300 ${
+                      isActive
+                        ? "text-primary dark:text-white font-semibold"
+                        : "text-black/70 dark:text-white/60"
+                    }`}
                   >
-                    <div className="flex flex-col items-center">
-                      <div className=" ">
-                        <i className="fa fa-grip"></i>
-                        <img
-                          src={
-                            isActive
-                              ? item.active
-                              : item.inactive
-                          }
-                          alt="Image"
-                          className=" dark:shadow-[2px] shadow-white  text-private w-[23px] h-[23px] "
-                        />
-                      </div>
-                      <p
-                        className={`
-                      text-[11px] text-black dark:text-white text-opacity-80 font-400 ${location.pathname === item.url ? " text-tet font-500" : ""}
-                    `}
-                      >
-                        {item.title}
-                      </p>
-                    </div>
-                  </Link>
-                </div>
+                    {item.title}
+                  </p>
+                </Link>
               );
             })}
           </div>

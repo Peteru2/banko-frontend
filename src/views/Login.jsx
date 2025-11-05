@@ -49,18 +49,18 @@ const Login = () => {
     } else {
       setIcon(true);
       axios
-        .post(`${import.meta.env.VITE_BASE_URL}/login`, formData)
-        .then((response) => {
-          const { token } = response.data;
-          localStorage.setItem("token", token);
-          themedSwal({
-            icon: "success",
-            title: "Welcome Back!",
-            text: response.data.message,
-            showConfirmButton: false,
-              timer: 2000,
-            timerProgressBar: true,
-          }, theme)
+            .post(`${import.meta.env.VITE_BASE_URL}/login`, formData)
+            .then((response) => {
+              const { token } = response.data;
+              localStorage.setItem("token", token);
+              themedSwal({
+                icon: "success",
+                title: "Welcome Back!",
+                text: response.data.message,
+                showConfirmButton: false,
+                  timer: 2000,
+                timerProgressBar: true,
+              }, theme)
          
           navigate("/");
           setUserData(response.data.user);
