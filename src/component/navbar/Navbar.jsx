@@ -26,7 +26,7 @@ const Navbar = () => {
             {userData?.profileImage? (<img
               src={userData?.profileImage || ProImg}
               alt="profileImage"
-              className=" text-black  w-[22px] h-[22px]  rounded-full"
+              className=" text-black  w-[25px] h-[25px]  rounded-full"
             />):(
 
             <i className="fa fa-user text-black dark:text-white text-opacity-70 rounded-full"></i>
@@ -42,7 +42,7 @@ const Navbar = () => {
             })}</p>
           </div>
           <Link to ={'/notification'}>
-          <div className=" relative cursor-pointer w-[22px] mr-[17px]" onClick={handleNotice}>
+          <div className=" relative cursor-pointer w-[24px] mr-[17px]" onClick={handleNotice}>
             <i className="fa fa-bell text-black dark:text-white text-opacity-70"></i>
             <span className={`${hasTransactions?"bg-red":""} absolute left-[10px] top-[2px]  w-1 h-1 rounded-full`}></span>
           </div>

@@ -36,7 +36,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
-    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;      
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";

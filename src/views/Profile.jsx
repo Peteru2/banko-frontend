@@ -37,13 +37,13 @@ const Profile = () => {
               <div className="text-[12px] flex mt-1 justify-between">
                 <h2>Full Name</h2>
                 <h2>
-                  {userData.firstname} {userData.lastname}
+                  {userData?.firstname} {userData?.lastname}
                 </h2>
               </div>
               <div className="text-[12px] mt-1   flex justify-between">
                 <h2>Banko Account Number</h2>
                 <div className="flex relative">
-                  <h2>{userData.accountNum} </h2>
+                  <h2>{userData?.accountNum} </h2>
                   <button
                     onClick={handleCopy}
                     className="ml-1 hover:text-private transition"
@@ -68,9 +68,9 @@ const Profile = () => {
 
           <ThemeToggle />
           <div className="text-black mt-2 dark:text-white">
-          {userData.role === "admin"?(<>
+          {userData?.role === "admin"?(<>
             <Link to={"/admin"}>Admin</Link>
-            <p>{userData.role}</p>
+           
             
             </>
           ):

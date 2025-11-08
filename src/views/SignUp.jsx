@@ -38,8 +38,10 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = {};
+    const normalizedEmail= formData.email.trim().toLowerCase()
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    const phoneRegex = /^(\+?\d{1,4})?\d{10,14}$/;
+    
+    const phoneRegex = /^(\+?\d{1,4})?\d{10,14}$/;  
 
     if (!formData.firstname.trim())
       newErrors.firstname = "First name is required";
@@ -47,7 +49,7 @@ const SignUp = () => {
       newErrors.lastname = "Last name is required";
     else if (!formData.email.trim())
       newErrors.email = "Email is required";
-    else if (!emailRegex.test(formData.email))
+    else if (!emailRegex.test(normalizedEmail))
       newErrors.email = "Invalid email format";
     else if (!formData.phoneNumber.trim())
       newErrors.phoneNumber = "Phone number is required";
