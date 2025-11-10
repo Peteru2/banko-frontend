@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+  import React, { useState } from "react";
 import api from "../services/api.jsx";
 import Swal from "sweetalert2";
 import { useAuth } from "../auth/AuthContext.jsx";
@@ -60,13 +60,13 @@ const TransactionForm = ({ handleShowTransferForm }) => {
   timerProgressBar: true,
       }, theme);
       
-      if (response.data.message === "Funds transferred successfully") {
+      if (response.data.success === true) {
+        
         await fetchData();
         setShowConfirmModal(false);
         setRecipientAcctNumber("");
         setAmount("");
         setTransPin("");
-        handleShowTransferForm();
       }
     } catch (error) {
        themedSwal({

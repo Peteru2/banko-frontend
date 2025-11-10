@@ -1,17 +1,26 @@
 
-import Footer from '../component/footer/footer';
-import Navbar from '../component/navbar/Navbar';
 import Payment from '../component/Payment';
-import Loader from '../component/Loader';
 import AccDetails from '../component/AccDetails';
 import { useAuth } from '../auth/AuthContext';
 import Cards from '../component/Cards';
 import imageLoader from "../assets/image/Logo.png"
 import Layout from './Layout';
-
+import { useState, useEffect } from 'react';
+import WelcomeModal from '../component/WelcomeModal';
 
 const Dashboard = () => {
+  const [showWelcome, setShowWelcome] = useState(false);
   const { userData, loading } = useAuth()
+
+  useEffect(() => {
+    const hasSeen = localStorage.getItem("hasSeenWelcome");
+    if (!hasSeen) setShowWelcome(true);
+  }, []);
+
+  const closeModal = () => {
+    localStorage.setItem("hasSeenWelcome", "true");
+    setShowWelcome(false);
+  };
   if (loading) return (
     <div className="h-screen flex justify-center items-center w-full text-center bg-grayLight dark:bg-darkGray">
       <div className="flex flex-col items-center justify-center">
@@ -31,12 +40,15 @@ const Dashboard = () => {
   return (
     <>
 
+   
 
       {userData && (
 
 
         <Layout >
-
+   <div className="p-4">
+      {showWelcome && <WelcomeModal onClose={closeModal} />}
+    </div>
 
           <Payment />
           <Cards />
