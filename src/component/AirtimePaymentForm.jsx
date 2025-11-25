@@ -51,7 +51,7 @@ if (!phoneRegex.test(phone)){
     }
    
     if (phone != sandBoxNum) {
-      return themedSwal({ icon: "error", title: "Incorrect Phone Number", text: "Error purchasing Airtime, this is a sandbox account you can only purchase using this number: 08011111111" }, theme);
+      return themedSwal({ icon: "error", title: "Incorrect Phone Number", text: "Error purchasing Airtime, this is a sandbox account you can only purchase using this number: 08011111111"     }, theme);
     }
 
     setLoading(true);

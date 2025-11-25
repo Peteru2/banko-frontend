@@ -47,7 +47,7 @@ const TransHistory = () => {
         ) : (
           Object.entries(groupedTrans || {}).map(([date, txs]) => (
             <div key={date}>
-              <h3 className="font-semibold text-[12px] mt-[10px] md:pl-[20px] pl-[20px] dark:text-white text-black text-opacity-60">
+              <h3 className="font-semibold text-[12px] mt-[30px] md:pl-[20px] pl-[20px] dark:text-white text-black text-opacity-60">
                 {date}
               </h3>
               {txs.map((tx, idx) => (

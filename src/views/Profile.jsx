@@ -23,7 +23,7 @@ const Profile = () => {
   return (
     <motion.div
       
-      className="flex justify-center font-roboto"
+      className="flex justify-center mt-[30px] font-roboto"
     >
       <div className=" w-full max-w-[560px] ">
         <Header header={"Profile"} />
