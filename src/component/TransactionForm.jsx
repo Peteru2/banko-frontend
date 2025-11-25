@@ -1,11 +1,11 @@
-  import React, { useState } from "react";
+import React, { useState } from "react";
 import api from "../services/api.jsx";
 import Swal from "sweetalert2";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { useTheme } from "../context/ThemeContext.jsx"
 import themedSwal from "../utils/themedSwal"
 
-const TransactionForm = ({ handleShowTransferForm }) => {
+const TransactionForm = () => {
   const { fetchData } = useAuth(); 
   const { theme } = useTheme()
   const [recipientAccountNumber, setRecipientAcctNumber] = useState("");

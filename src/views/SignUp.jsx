@@ -80,14 +80,14 @@ const SignUp = () => {
         });
         themedSwal({
           icon: "success",
-                  title: "Account Created 🎉",
+                  title: "Account Created",
                   // text: "Please verify your email to continue.",
                   showConfirmButton: false,
                   timer: 2000,
                   timerProgressBar: true,
         }, theme)
                
-
+        navigate("/login");
         setUserId(response.data?.user?._id);
         setIcon(false);
       })

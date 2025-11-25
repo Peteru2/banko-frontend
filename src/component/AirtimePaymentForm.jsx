@@ -36,6 +36,7 @@ const AirtimePaymentForm = ({ close }) => {
   };
 
   const handleSubmit = async () => {
+    const sandBoxNum = "08011111111"
     const amt = Number(amount.replace(/,/g, ""));
     const phoneRegex = /^(\+?\d{1,4})?\d{10,14}$/;
 
@@ -47,6 +48,10 @@ if (!phoneRegex.test(phone)){
 }
     if (amt > userData.balance) {
       return themedSwal({ icon: "error", title: "Low Balance", text: "Insufficient account balance." }, theme);
+    }
+   
+    if (phone != sandBoxNum) {
+      return themedSwal({ icon: "error", title: "Incorrect Phone Number", text: "Error purchasing Airtime, this is a sandbox account you can only purchase using this number: 08011111111" }, theme);
     }
 
     setLoading(true);
