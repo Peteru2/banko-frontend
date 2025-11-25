@@ -32,7 +32,7 @@ export const TransComp = ({ trans, userData, option }) => {
 
                 <h2
                   className={`${
-                    transaction.status === 'Failed' || 'failed'
+                    transaction.status === 'Failed' || transaction.status === 'failed'
                       ? 'text-red dark:text-opacity-100 text-opacity-60'
                       : 'text-private'
                   } ml-auto text-[11px]`}
@@ -47,7 +47,7 @@ export const TransComp = ({ trans, userData, option }) => {
                 </h2>
                 <h2
                   className={`${
-                    transaction.status === 'Failed' || 'fialed'
+                    transaction.status === 'Failed' || transaction.status === 'failed'
                       ? 'text-red dark:text-opacity-100 text-opacity-60'
                       : 'text-private'
                   } ml-auto text-[11px]`}

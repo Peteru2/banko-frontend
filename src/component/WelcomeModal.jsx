@@ -14,7 +14,7 @@ const WelcomeModal = ({ onClose }) => {
 
         <ul className="space-y-1 text-sm text-neutral-800 dark:text-neutral-200 mb-6">
           <li>• Transfer funds to other registered users</li>
-          <li>• Purchase airtime(SandBox only)</li>
+          <li>• Purchase airtime(SandBox only,use this number(08011111111))</li>
           <li>• Update your profile + avatar</li>
           <li>• View transaction history</li>
           <li>• Switch mode(Light to Dark and vise versa)</li>
