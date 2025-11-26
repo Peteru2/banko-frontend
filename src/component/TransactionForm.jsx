@@ -21,6 +21,11 @@ const TransactionForm = () => {
   const raw = value.replace(/[^\d]/g, "");  
   return raw ? Number(raw).toLocaleString() : "";
 };
+const parseAmount = (formattedValue) => {
+  const raw = formattedValue.replace(/,/g, "");
+  return Number(raw);
+};
+
   const handleShowInput = () => {
     setShowPinInput(!showPinInput);
     setLoading(false);
@@ -30,11 +35,11 @@ const TransactionForm = () => {
   const handleSubmitValidation = async (e) => {
     e.preventDefault();
     setValidating(true);
-
+    const amountToSend = parseAmount(amount);
     try {
       const response = await api.post("/validateTransfer", {
         recipientAccountNumber,
-        amount,
+        amount:amountToSend,
       });
 
       if (response.data.message === "success") {
