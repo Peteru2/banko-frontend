@@ -1,23 +1,30 @@
 import React from 'react'
 import { Link, useLocation } from "react-router-dom";
 import Header from "../component/Header";
- 
+ import { Info } from "lucide-react";
+
 
 
 const More = () => {
   return (
     <div className=" flex  justify-center  ">
-        <div className="w-full max-w-[560px]">
-            <div className="mt-[50px]">
                  <Header header={"More"} />
-                 <Link
-                  to={"/appinfo"}
-                  
-                  className=" flex-col  dark:text-white items-center  w-full cursor-pointer"
-                >
-                  <li className=" ml-[20px] text-blue-400">  AppInfo</li>
-                    </Link>
-            </div>
+
+        <div className="w-full max-w-[560px] px-[20px]">
+
+            <div className="mt-[60px] w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div className="">
+    <Link
+  to={"/appinfo"}
+  className="flex justify-center items-center rounded-[10px] bg-white dark:bg-neutral-800 h-[150px] dark:text-white w-full cursor-pointer"
+>
+  <div className="flex flex-col justify-center items-center gap-2">
+    <Info className="w-[40px] h-[40px] text-blue-400" />
+    <p className="text-blue-400">AppInfo</p>
+  </div>
+</Link>
+  </div>
+  </div>
             </div>
     </div>
   )

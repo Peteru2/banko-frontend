@@ -179,14 +179,14 @@ const AirtimePaymentForm = ({ close }) => {
 )}
     
       {showPinInput && (
-          <form className="modal w-[300px] font-roboto modal-show">
-            <div className="bg-white dark:bg-neutral-800 dark:text-white p-4 rounded-[6px]">
+          <form className="modal w-[400px] font-roboto modal-show">
+            <div className="bg-white dark:bg-neutral-800 dark:text-white  text-neutral-800 p-4 rounded-[6px]">
               <div className="flex items-center mb-3">
-                <h2 className="text-14px dark:text-white flex-1 text-center">Transaction Pin</h2>
+                <h2 className="text-14px  font-semibold text-private flex-1 text-center">Transaction Pin</h2>
                 <button
                   onClick={() => handleShowInput()}
                   aria-label="Close modal"
-                  className="ml-auto text-gray-500 hover:text-gray-700"
+                   className="ml-auto absolute right-[30px] top-[30px] hover:text-gray-700"
                 >
                   <i className="fa fa-times"></i>
                 </button>

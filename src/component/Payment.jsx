@@ -26,17 +26,18 @@
         key: "moneyTransfer",
       },
       {
-        title1: "Top Up",
-        title2: "Payment",
-        icon: CreditCard,
-        key:"topup",
-      },
-      {
         title1: "Buy",
         title2: "Airtime",
         icon: Smartphone, 
         key: "airtimePayment",
       },
+      {
+        title1: "Top Up",
+        title2: "Payment",
+        icon: CreditCard,
+        key:"topup",
+      },
+      
       {
         title1: "Mobile",
         title2: "Payment",
