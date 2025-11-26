@@ -16,6 +16,8 @@
       moneyTransfer:TransactionForm,
       airtimePayment:AirtimePaymentForm,
     }
+   
+
   const FormComponent = activeForm ? forms[activeForm] : null;
     
   const paymentList = [
@@ -24,18 +26,23 @@
         title2: "Transfer",
         icon: Send,
         key: "moneyTransfer",
+        phrase:"Make a transfer"
       },
       {
         title1: "Buy",
         title2: "Airtime",
         icon: Smartphone, 
         key: "airtimePayment",
+        phrase:"Airtime"
+
       },
       {
         title1: "Top Up",
         title2: "Payment",
         icon: CreditCard,
         key:"topup",
+        phrase:""
+
       },
       
       {
@@ -43,8 +50,12 @@
         title2: "Payment",
         icon: University,
         key: "billpay",
+        phrase:""
+
       },
     ];
+     const activePaymentItem = paymentList.find(item => item.key === activeForm);
+    const activePhrase = activePaymentItem ? activePaymentItem.phrase : "";
 
     return (
       <>
@@ -75,9 +86,11 @@
                  
                 
                       <div className={`genModal font-roboto ${FormComponent ? "border border-white modal-show w-full" : ""}`}>
-                        <h2 className="absolute top-4 cursor-pointer" onClick={() => setActiveForm(null)}>
-                          <i className="fa fa-arrow-left dark:text-white text-black text-opacity-70"></i>
-                        </h2>
+                       <h2 className="absolute top-4 left-4 flex items-center space-x-2 cursor-pointer" onClick={() => setActiveForm(null)}>
+  <i className="fa fa-arrow-left dark:text-white m text-black text-opacity-70"></i>
+  <span className="dark:text-white text-[12px] text-black text-opacity-70">{activePhrase}</span>
+</h2>
+
                        {FormComponent&&(
                         <FormComponent close={() => setActiveForm(null)} />
                         )}
