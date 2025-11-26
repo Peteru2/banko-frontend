@@ -3,7 +3,12 @@ import React, {
   useRef,
   forwardRef,
   useImperativeHandle,
+  useLocation
 } from "react";
+import themedSwal from "../utils/themedSwal";
+import { useTheme } from "../context/ThemeContext";
+
+
 const PinInputField = forwardRef(
   ({ value, onChange, onFocusNext, onFocusPrev }, ref) => {
     const inputRef = useRef(null);
@@ -47,11 +52,11 @@ const PinInputField = forwardRef(
 );
 
 
-const TransPinForm = ({ onSubmit }) => {
+const TransPinForm = ({ onSubmit, buttonText, loadingText, loading, setLoading }) => {
   const [pinValues, setPinValues] = useState(["", "", "", ""]);
   const inputRefs = useRef(Array(4).fill(null));
-  const [loading, setLoading] = useState(false)
-
+  // const [loading, setLoading] = useState(false)
+  const { theme } = useTheme();
 
   const handlePinChange = (index, value) => {
     const newPinValues = [...pinValues];
@@ -76,11 +81,14 @@ const TransPinForm = ({ onSubmit }) => {
 
     if (pinValues.every((value) => value !== "")) {
       const pin = pinValues.join("");
-      setLoading(true)
       onSubmit(pin);
+      setLoading(true)
+
     } else {
-      console.log("Please fill in all PIN fields.");
       setLoading(false)
+      themedSwal({ icon: "error", title: "Failed", text: "Please fill in all PIN Fields" }, theme);
+
+
 
     }
   };
@@ -101,16 +109,17 @@ const TransPinForm = ({ onSubmit }) => {
           ))}
         </div>
         <button
-          className="bg-private rounded-md w-full text-center text-white py-2"
+          className="bg-private disabled:opacity-60 rounded-md w-full text-center text-white py-2"
           onClick={handleSubmit}
+          disabled={loading}
         >
-        
+       
           {loading ? (
                       <span>
-                        Setting <i className="fas fa-spinner fa-spin"></i>
+                        {loadingText} <i className="fas fa-spinner fa-spin"></i>
                       </span>
                     ) : (
-                      <span>Set</span>
+                      <span>{buttonText}</span>
                     )}
                   
         </button>

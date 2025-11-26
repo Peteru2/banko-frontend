@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <>
       <nav className=" w-full h-12 justify-center mb-[15px] index-9 flex items-center font-roboto ">
-        <div className=" flex w-full max-w-[600px] dark:bg-darkGray bg-bg  fixed top-0 h-[60px] rounded-md rounded-b-[0px] border-b-[1px] dark:border-0 border-gray items-center">
+        <div className=" flex w-full max-w-[600px] dark:bg-darkGray bg-white  fixed top-0 h-[60px] rounded-md rounded-b-[0px] border-b-[1px] dark:border-0 border-gray items-center">
           <div className="w-full flex items-center justify-between">
             <Link to='/profile'>
           <div className="ml-[20px]">

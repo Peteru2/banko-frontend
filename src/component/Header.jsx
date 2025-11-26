@@ -4,7 +4,7 @@ const Header = ({header}) => {
 
     const navigate = useNavigate()
   return (
-    <div className=" flex text fixed top-0 mb-2   text-black dark:bg-neutral-800 w-full max-w-[560px] dark:text-white text-opacity-60  items-center h-[48px] text-[18px]">
+    <div className=" flex text fixed top-0 mb-2  bg-white  text-black dark:bg-neutral-800 w-full max-w-[560px] dark:text-white text-opacity-60  items-center h-[48px] text-[18px]">
             <h2 className="cursor-pointer absolute md:px-[10px] pl-[20px] pr-[0px]" onClick={() => navigate(-1)}>
               <i className="fa fa-arrow-left"> </i>
             </h2>

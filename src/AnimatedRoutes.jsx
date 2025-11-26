@@ -9,6 +9,8 @@ import SignUp from "./views/SignUp";
   import Profile from "./views/Profile";
   import Notification from "./component/Notification";
   import Admin from './views/Admin';
+  import More from './views/More';
+  import AppInfo from './views/AppInfo'
   import { AnimatePresence, motion } from "framer-motion";
   import { useLocation } from "react-router-dom";
   import ProtectedRoutes from './component/ProtectedRoutes';
@@ -35,6 +37,10 @@ const AnimatedRoutes = () => {
             <Route path="/history" element={<History />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/notification" element={<Notification />} />
+            <Route path="/appinfo" element={<AppInfo />} />
+            <Route path="/more" element={<More />} />
+
+
             <Route 
               path="/admin" 
               element={

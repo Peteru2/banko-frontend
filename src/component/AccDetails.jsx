@@ -19,7 +19,7 @@ const AccDetails = () => {
   const [bvn, setBvn] = useState(false);
   const [showPinInput, setShowPinInput] = useState(false);
   const [showUpdatePhoneNumber, setShowUpdatePhoneNumber] = useState(false);
-  
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (userData && userData.transactionPin === "0") {
@@ -35,6 +35,7 @@ const AccDetails = () => {
   }, [userData]);
 
   const handleSubmitTransactionPin = async (pin) => {
+    setLoading(true)
     try {
       const response = await api.put("/updateTransactionPin", { pin });
       themedSwal({
@@ -48,7 +49,7 @@ const AccDetails = () => {
       }, theme)
        
 
-
+      setLoading(false)
       setShowPinInput(false);
       await fetchData(); 
     } catch (error) {
@@ -60,7 +61,7 @@ const AccDetails = () => {
   timer: 2000,               
   timerProgressBar: true,
       }, theme)
-      
+      setLoading(false)
       console.error("Failed to update transaction pin:", error);
     }
   };
@@ -108,7 +109,9 @@ const AccDetails = () => {
           <form className="modal w-[300px] font-roboto modal-show">
             <div className="bg-white dark:bg-neutral-800 dark:text-white p-4 rounded-[6px]">
               <h2 className="text-19px dark:text-white text-center">Set Your Transaction Pin</h2>
-              <TransPinForm onSubmit={handleSubmitTransactionPin} />
+              <TransPinForm onSubmit={handleSubmitTransactionPin}  
+              buttonText={"Set"}
+              loadingText={"Setting"}/>
             </div>
           </form>
         )}

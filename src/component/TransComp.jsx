@@ -27,7 +27,7 @@ export const TransComp = ({ trans, userData, option }) => {
             >
               <div className="flex items-center w-full">
                 <h2 className="font-normal text-xs dark:text-white truncate max-w-[220px] sm:max-w-none">
-                  Airtime Purchase ({transaction.network}) to {transaction.phoneNumber}
+                  Airtime Purchase ({transaction.network}) to {transaction.phone}
                 </h2>
 
                 <h2
