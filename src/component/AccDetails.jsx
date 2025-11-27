@@ -76,7 +76,11 @@ const AccDetails = () => {
     );
   }
 
-  const trans = userData.transferHistory?.slice().reverse() || [];
+  const trans = Array.isArray(userData?.transferHistory)
+  ? [...userData.transferHistory].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    )
+  : [];
 
   return (
     <div className="w-full justify-center flex font-roboto">
