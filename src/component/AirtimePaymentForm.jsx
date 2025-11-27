@@ -47,10 +47,10 @@ const AirtimePaymentForm = ({ close }) => {
     if (!phone || !amt) return { valid: false, msg: "Phone & amount required." };
     if (!phoneRegex.test(phone)) return { valid: false, msg: "Phone number not valid." };
     if (amt > userData.balance) return { valid: false, msg: "Insufficient account balance." };
-    if (phone !== sandboxNum) return {
-      valid: false,
-      msg: `Sandbox account only. Use: ${sandboxNum}`
-    };
+    // if (phone !== sandboxNum) return {
+    //   valid: false,
+    //   msg: `Sandbox account only. Use: ${sandboxNum}`
+    // };
 
     return { valid: true, amt };
   };
@@ -73,7 +73,6 @@ const AirtimePaymentForm = ({ close }) => {
     if (!validation.valid) return themedSwal({ icon: "error", title: "Error", text: validation.msg }, theme);
 
     setLoading({ ...loading, verify: true });
-    setShowPinInput(true);
 
     const data = await callApi("/transactions/airtimeVerify", {
       phone,
@@ -82,8 +81,7 @@ const AirtimePaymentForm = ({ close }) => {
     });
 
     if (data.success) {
-      themedSwal({ icon: "success", title: "Success", text: data.message }, theme);
-      fetchData();
+      setShowPinInput(true);
     } else {
       themedSwal({ icon: "error", title: "Failed", text: data.message }, theme);
       setShowPinInput(false);
