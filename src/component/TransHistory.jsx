@@ -53,9 +53,9 @@ const TransHistory = () => {
     <div className="flex justify-center font-roboto">
       <div className="w-full max-w-[560px]">
         <Header header="Transaction history" />
-
+      <div className="mt-[60px]">
         {Object.entries(groupedByDate).map(([date, txs]) => (
-          <div key={date} className="mt-[50px]">
+          <div key={date} >
             <h3 className="font-semibold text-[12px] md:pl-[20px] pl-[20px] dark:text-white text-black text-opacity-60">
               {date}
             </h3>
@@ -70,6 +70,7 @@ const TransHistory = () => {
             ))}
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

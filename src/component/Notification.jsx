@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
-import api from "../services/api.jsx";
 import { useAuth } from "../auth/AuthContext.jsx";
-
 import Header from "./Header.jsx";
 
 const Notification = () => {
   const {userData} = useAuth()
-  const [transHis, setTransHis] = useState(null);
 
   const option = {
     year: "numeric",
@@ -18,41 +14,24 @@ const Notification = () => {
     timeZone: "UTC", 
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-       
-        const response = await api.get("/transactionHistory");
-
-        setTransHis(response.data.transferHistory);
-      } catch (error) {
-        if (error.response.data.error == "No history found") {
-          setTransHis([]);
-          console.log(transHis);
-        }
-      }
-    };
-
-    fetchData();
-  }, []);
-  const trans = transHis && transHis.slice().reverse();
+  const trans = userData && userData.transferHistory.slice().reverse();
 
   return (
     <>
      <div className="flex justify-center  font-roboto">
       <div className="w-full max-w-[560px] ">
                  <Header header="Notification" />
-         
-          {transHis && transHis.length === 0 ? (
+         <div className="mt-[60px]">
+          {userData && userData.transferHistory.length === 0 ? (
             <div>
-              <h2 className="font-bold bg-white mt-[60px] dark:bg-darkGray text-black dark:text-white rounded-[10px] mx-[20px] md:mx-0 text-sm text-center p-[12px] ">
+              <h2 className="font-bold bg-white  dark:bg-darkGray text-black dark:text-white rounded-[10px] mx-[20px] md:mx-0 text-sm text-center p-[12px] ">
                 No Notification Available
               </h2>
             </div>
           ) : (
             trans &&
             trans.map((transaction) =>
-              userData && userData._id !== transaction.sender._id ? (
+              userData && userData._id !== transaction.sender._id && transaction.type != "airtime"? (
                 <div className="text-sm my-3 bg-white dark:bg-darkGray mx-[20px] rounded-[10px] md:mx-0 p-[12px]">
                   <h2 className="text-xs text-black dark:text-white  dark:text-opacity-50 text-opacity-40 text-center my-2">
                     {new Date(transaction.date).toLocaleString("en-US", option)}
@@ -84,6 +63,7 @@ const Notification = () => {
               ) : null
             )
           )}
+          </div>
         </div>
       </div>
     </>
