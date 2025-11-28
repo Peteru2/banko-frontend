@@ -177,7 +177,7 @@ const AirtimePaymentForm = ({ close }) => {
 )}
     
       {showPinInput && (
-          <form className="modal w-[400px] font-roboto modal-show">
+          <form className="modal w-full  max-w-[400px] font-roboto modal-show">
             <div className="bg-white dark:bg-neutral-800 dark:text-white  text-neutral-800 p-4 rounded-[6px]">
               <div className="flex items-center mb-3">
                 <h2 className="text-14px  font-semibold text-private flex-1 text-center">Transaction Pin</h2>

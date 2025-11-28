@@ -44,7 +44,7 @@ const PinInputField = forwardRef(
         value={value}
         onChange={handleInputChange}
         onFocus={() => inputRef.current.select()}
-        className="border-[1px] w-full dark:bg-neutral-800 dark:border-gray border-neutral-700  text-center flex rounded-md  outline-none py-1 px-2 mx-2  my-2 "
+        className="border-[1px] w-full dark:bg-neutral-800 dark:border-white border-neutral-700  text-center flex rounded-md  outline-none py-1 px-2 mx-2  my-2 "
         onKeyDown={handleKeyDown}
       />
     );

@@ -110,7 +110,7 @@ const AccDetails = () => {
 
        
         {showPinInput && (
-          <form className="modal w-[300px] font-roboto modal-show">
+          <form className="modal w-full  max-w-[400px] font-roboto modal-show">
             <div className="bg-white dark:bg-neutral-800 dark:text-white p-4 rounded-[6px]">
               <h2 className="text-[14px] text-private font-semibold text-center">Set Your Transaction Pin</h2>
               <TransPinForm onSubmit={handleSubmitTransactionPin}  

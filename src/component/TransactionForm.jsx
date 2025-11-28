@@ -157,7 +157,7 @@ const parseAmount = (formattedValue) => {
         <>
           <div className="overlay"></div>
 
-          <form className="modal w-[400px] modal-show font-roboto">
+          <form className="modal w-full  max-w-[400px] modal-show font-roboto">
             <div className="bg-white dark:bg-neutral-800 dark:text-white text-neutral-800 p-8 rounded-[6px]">
               <div className="flex items-center mb-3">
                 <h2 className="text-[14px] font-semibold text-private flex-1 text-center">Confirm Transfer</h2>
